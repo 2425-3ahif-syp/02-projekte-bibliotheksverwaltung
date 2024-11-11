@@ -1,0 +1,117 @@
+= Bibliotheksverwaltung
+Simon Koller, David Weißl-Fischer, Konstantin Wetscher
+1.0.0, {docdate}: Projektantrag
+ifndef::imagesdir[:imagesdir: images]
+//:toc-placement!:  // prevents the generation of the doc at this position, so it can be printed afterwards
+:sourcedir: ../src/main/java
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
+
+//Need this blank l
+// print the toc here (not at the default position)
+//toc::[]
+
+== Pflichtenheft "Was mache ich"
+
+
+=== Ausgangssituation
+
+In vielen Bibliotheken wird die Verwaltung von Büchern oft manuell durchgeführt. Dies ist zeitaufwendig und fehleranfällig.
+
+=== Istzustand
+
+Aktuell werden Bücher von manuellen Listen, Excel-Tabellen oder unübersichtlichen Datenbanken erfasst. Es fehlt an einer zentralen und effizienten Lösung zur Verwaltung von Buchdaten.
+
+=== Problemstellung
+Die manuelle Verwaltung von Büchern führt zu folgenden Problemen:
+
+Hohe Fehleranfälligkeit bei der Datenpflege
+
+Schwierige Suche nach bestimmten Büchern
+
+Fehlende Übersicht über den gesamten Bestand
+
+Kein automatisches Erstellen von Statistiken
+
+=== Aufgabenstellung
+
+Entwicklung eines Programmes zur Verwaltung von Büchern
+
+Einfache Eingabe und Verwaltung von Buchdaten
+
+Möglichkeit zur Suche nach Büchern anhand verschiedener Kriterien
+
+Erstellung von Statistiken über den Buchbestand
+
+==== Funktionale Anforderungen
+
+Erfassen von Büchern
+
+Statistiken erstellen
+
+Ausleihen und Zurückgeben von Büchern
+
+Reservierung von Büchern
+
+Erstellung von Nutzerprofilen mit Ausleihhistorie
+
+==== Nichtfunktionale Anforderungen (NFA)
+
+Benutzerfreundliche Oberfläche
+
+Stabilität und Sicherheit der Anwendung
+
+Skalierbarkeit für wachsende Buchbestände
+
+=== Ziele
+
+Effiziente und benutzerfreundliche Lösung zur Verwaltung von Büchern
+
+Automatisierung von Prozessen
+
+Verbesserung der Übersichtlichkeit und des Zugriffs auf Buchdaten
+
+=== Mengengerüst
+
+Initialer Buchbestand: 500 Bücher
+
+Anzahl der Benutzer: 100
+
+=== Rahmenbedingungen
+
+Programmiersprache: Java
+
+Verwendung von Linux
+
+Nicht zu komplex
+
+== Entwurf "Wie mache ich es"
+=== Systemarchitektur
+
+Datenbank: Speicherung von Buchdaten, Benutzerinformationen und Ausleihinformationen
+
+Logik: Java-Klassen für die Geschäftslogik (Buch, Benutzer, Ausleihe)
+
+Benutzeroberfläche: JavaFX zur Erstellung einer intuitiven Benutzeroberfläche
+
+== Projekthandbuch "Organisatorische Rahmenbedingungen"
+
+
+
+=== GANTT-Diagramm
+
+
+[plantuml,gantt-protoype,png]
+----
+@startgantt
+[make Prototype] lasts 25 days
+[Test prototype] lasts 10 days
+[Test prototype] starts at [make Prototype]'s end
+[Prototype completed] happens at [Test prototype]'s end
+[Setup assembly line] lasts 7 days
+[Setup assembly line] starts at [Test prototype]'s end
+[Test prototype 2] lasts 5 days
+[Test prototype 2] starts at [Prototype completed]'s end
+@endgantt
+----
