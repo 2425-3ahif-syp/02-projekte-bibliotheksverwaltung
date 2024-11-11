@@ -15,7 +15,7 @@ ifndef::imagesdir[:imagesdir: images]
 == Projektantrag 
 
 === Projektbeschreibung
-
+In diesem Projekt geht es darum, ein Programm zu entwickeln, das Bibliotheken bei der Verwaltung ihrer Bücher hilft. Die Software soll es einfach machen, neue Bücher hinzuzufügen, alte Bücher zu bearbeiten oder zu löschen. Nutzer der Bibliothek sollen schnell und einfach Bücher ausleihen und zurückgeben können, ohne dass ein Mitarbeiter alles manuell erledigen muss. Das hilft der Bibliothek, zu sehen, welche Bücher ausgeliehen werden.
 
 === Projektziele
 Ziel ist es ein Programm zu entwickeln, welches die Verwaltung von Büchern über verschiedene Kriterien, in einer Bibliothek, vereinfacht. Natürlich sollen auch Bücher ausgeliehen und zurückgegeben werden, und darüber sollten danach Statistiken ermittelt werden könnnen.
@@ -24,4 +24,4 @@ Ziel ist es ein Programm zu entwickeln, welches die Verwaltung von Büchern übe
 Es soll eine Stabile und für den Benutzer, seine einfach zu verwendende Software entstehen, die die Verwaltung von Büchern in einer Bibliothek verbessert. Buchdaten sollten übersichtlicher sein und viele Prozesse, wie das ausleihen oder zurückgeben sollen automatisiert werden, anstatt manuell von einem Mitarbeiter durchgeführt zu werden.
 
 === Konsquenzen bei Nichtrealisierung
-
+Ohne diese Software bleibt vieles in der Bibliothek Handarbeit, also auch  mehr Arbeit und ein höheres Risiko für Fehler. So verliert die Bibliothek wichtige Informationen, die helfen könnten, ihre Auswahl zu verbessern und besser auf die Wünsche der Besucher einzugehen.
