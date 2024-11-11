@@ -74,7 +74,7 @@ Verbesserung der Übersichtlichkeit und des Zugriffs auf Buchdaten
 
 === Mengengerüst
 
-Initialer Buchbestand: 500 Bücher
+Initialer Buchbestand: 10000 Bücher
 
 Anzahl der Benutzer: 100
 
@@ -95,23 +95,5 @@ Logik: Java-Klassen für die Geschäftslogik (Buch, Benutzer, Ausleihe)
 
 Benutzeroberfläche: JavaFX zur Erstellung einer intuitiven Benutzeroberfläche
 
-== Projekthandbuch "Organisatorische Rahmenbedingungen"
 
 
-
-=== GANTT-Diagramm
-
-
-[plantuml,gantt-protoype,png]
-----
-@startgantt
-[make Prototype] lasts 25 days
-[Test prototype] lasts 10 days
-[Test prototype] starts at [make Prototype]'s end
-[Prototype completed] happens at [Test prototype]'s end
-[Setup assembly line] lasts 7 days
-[Setup assembly line] starts at [Test prototype]'s end
-[Test prototype 2] lasts 5 days
-[Test prototype 2] starts at [Prototype completed]'s end
-@endgantt
-----
