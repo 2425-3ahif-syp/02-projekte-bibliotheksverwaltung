@@ -31,8 +31,21 @@ jobs:
 
       - name: run docker
         run: |
-          sudo ${{ env.INPUTPATH }}/scripts/docker-convert.sh ${{ env.INPUTPATH }} ${{ env.SLIDES }}
-          tree
+          docker run --rm \
+            -v ${{ github.workspace }}:/documents \
+            -w /documents \
+            asciidoctor/docker-asciidoctor:latest \
+            asciidoctor-revealjs \
+            -r asciidoctor-diagram \
+            -r asciidoctor-revealjs \
+            -a revealjsdir=https://cdn.jsdelivr.net/npm/reveal.js@4.5.0 \
+            -a revealjs_theme=white \
+            -a revealjs_history=true \
+            -a revealjs_plugin_highlight=enabled \
+            -a source-highlighter=highlight.js \
+            -D slides \
+            -o index.html \
+            slides/index.adoc
 
 
       - name: Deploy to GitHub Pages
