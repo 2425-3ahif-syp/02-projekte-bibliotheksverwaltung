@@ -75,6 +75,4 @@ rectangle "Bibliotheksverwaltung" {
     Admin -- (Statistiken einsehen)
 }
 
-
-
 @enduml
