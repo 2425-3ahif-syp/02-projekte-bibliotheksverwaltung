@@ -1,0 +1,14 @@
+
+== Userstorys
+
+1. Als Bibliotheksmitarbeiter möchte ich neue Bücher in das System eintragen, damit sie für Benutzer zur Ausleihe verfügbar sind.
+
+2. Als Bibliotheksnutzer möchte ich Bücher online suchen und reservieren, damit ich sie später in der Bibliothek abholen kann.
+
+3. Als Bibliotheksmitarbeiter möchte ich eine Übersicht über ausgeliehene Bücher und Fälligkeitsdaten haben, damit ich Mahnungen rechtzeitig versenden kann.
+
+4. Als Bibliotheksnutzer möchte ich meine ausgeliehenen Bücher und deren Rückgabefristen online einsehen, damit ich sie rechtzeitig zurückbringen kann.
+
+5. Als Administrator möchte ich Benutzerrollen und Zugriffsrechte verwalten, damit nur autorisierte Personen bestimmte Funktionen nutzen können.
+
+6. Als Bibliotheksmitarbeiter möchte ich Statistiken über die beliebtesten Bücher einsehen, damit ich den Bestand besser planen kann.
