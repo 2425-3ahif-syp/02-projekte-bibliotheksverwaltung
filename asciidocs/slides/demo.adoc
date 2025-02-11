@@ -76,3 +76,4 @@ rectangle "Bibliotheksverwaltung" {
 }
 
 @enduml
+----
