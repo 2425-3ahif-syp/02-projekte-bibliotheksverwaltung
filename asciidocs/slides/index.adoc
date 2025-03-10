@@ -83,8 +83,13 @@ rectangle "Bibliotheksverwaltung" {
 [.title-slide]
 == GUI-Entwurf
 
+[.background]
 == 
-[data-background-image="slides/images/Seite_1.png"]
++ 
+:revealjs_background: slides/images/Seite_1.png[]
 
+[.background]
 == 
-[data-background-image="slides/images/Seite_2.png"]
++ 
+:revealjs_background: slides/images/Seite_2.png[]
+
