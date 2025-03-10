@@ -148,19 +148,19 @@ rectangle "Bibliotheksverwaltung" {
 
 [.vertical]
 === Seite 1
-image::Seite_1_1.png[align="center"]
+image::Page_1_1.png[align="center"]
 
 === Seite 2
-image::Seite_1_2.png[align="center"]
+image::Page_1_2.png[align="center"]
 
 === Seite 3
-image::Seite_1_3.png[align="center"]
+image::Page_1_3.png[align="center"]
 
 === Seite 4
-image::Seite_2_1.png[align="center"]
+image::Page_2_1.png[align="center"]
 
 === Seite 5
-image::Seite_2_2.png[align="center"]
+image::Page_2_2.png[align="center"]
 
 === Seite 6
-image::Seite_2_3.png[align="center"]
+image::Page_2_3.png[align="center"]

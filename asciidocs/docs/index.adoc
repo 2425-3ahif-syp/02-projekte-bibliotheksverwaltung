@@ -10,6 +10,7 @@
 :revealjs_width: 1408
 :revealjs_height: 792
 :source-highlighter: highlightjs
+:revealjs_background_size: cover
 //:revealjs_parallaxBackgroundImage: images/background-landscape-light-orange.jpg
 //:revealjs_parallaxBackgroundSize: 4936px 2092px
 //:highlightjs-theme: css/atom-one-light.css
@@ -18,22 +19,39 @@
 :iconfont-name: fonts/fontawesome/css/all
 //:revealjs_parallaxBackgroundImage: background-landscape-light-orange.jpg
 //:revealjs_parallaxBackgroundSize: 4936px 2092px
-ifdef::env-ide[]
-:imagesdir: ../images
-endif::[]
-ifndef::env-ide[]
+//ifdef::env-ide[]
+//:imagesdir: ../images
+//endif::[]
+//ifndef::env-ide[]
+//:imagesdir: /images
+//endif::[]
+:imagesdir: slides/images
 :imagesdir: images
-endif::[]
 //:revealjs_theme: sky
 //:title-slide-background-image: img.png
 :title-slide-transition-speed: fast
 
+== Links
+link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/Pflichtenheft/pflichtenheft.adoc[Pflichtenheft^] +
+link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/Projektantrag/projektantrag.adoc[Projektantrag^] +
+link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/Userstorys.adoc[Userstorys^] +
+link:https://vm81.htl-leonding.ac.at/projects/4c9dca91-3a60-48be-b439-29c095c844e1[YouTrack^] +
 
-== Problemstellung
 
+== Pflichtenheft "Was mache ich"
+
+=== Ausgangssituation
+
+In vielen Bibliotheken wird die Verwaltung von Büchern oft manuell durchgeführt. Dies ist zeitaufwendig und fehleranfällig.
+
+=== Istzustand
+
+Aktuell werden Bücher von manuellen Listen, Excel-Tabellen oder unübersichtlichen Datenbanken erfasst. Es fehlt an einer zentralen und effizienten Lösung zur Verwaltung von Buchdaten.
+
+=== Problemstellung
 Die manuelle Verwaltung von Büchern führt zu folgenden Problemen:
 
-Aufwändige Verwaltung
+Hohe Fehleranfälligkeit bei der Datenpflege
 
 Schwierige Suche nach bestimmten Büchern
 
@@ -41,8 +59,7 @@ Fehlende Übersicht über den gesamten Bestand
 
 Kein automatisches Erstellen von Statistiken
 
-
-== Aufgabenstellung
+=== Aufgabenstellung
 
 Entwicklung eines Programmes zur Verwaltung von Büchern
 
@@ -52,6 +69,56 @@ Möglichkeit zur Suche nach Büchern anhand verschiedener Kriterien
 
 Erstellung von Statistiken über den Buchbestand
 
+==== Funktionale Anforderungen
+
+Erfassen von Büchern
+
+Statistiken erstellen
+
+Ausleihen und Zurückgeben von Büchern
+
+Reservierung von Büchern
+
+Erstellung von Nutzerprofilen mit Ausleihhistorie
+
+==== Nichtfunktionale Anforderungen (NFA)
+
+Benutzerfreundliche Oberfläche
+
+Stabilität und Sicherheit der Anwendung
+
+Skalierbarkeit für wachsende Buchbestände
+
+=== Ziele
+
+Effiziente und benutzerfreundliche Lösung zur Verwaltung von Büchern
+
+Automatisierung von Prozessen
+
+Verbesserung der Übersichtlichkeit und des Zugriffs auf Buchdaten
+
+=== Mengengerüst
+
+Initialer Buchbestand: 10000 Bücher
+
+Anzahl der Benutzer: 100
+
+=== Rahmenbedingungen
+
+Programmiersprache: Java
+
+Verwendung von Linux
+
+Nicht zu komplex
+
+== Entwurf "Wie mache ich es"
+=== Systemarchitektur
+
+Datenbank: Speicherung von Buchdaten, Benutzerinformationen und Ausleihinformationen
+
+Logik: Java-Klassen für die Geschäftslogik (Buch, Benutzer, Ausleihe)
+
+Benutzeroberfläche: JavaFX zur Erstellung einer intuitiven Benutzeroberfläche
 
 == Use Case Diagram
 [plantuml,bibliotheksverwaltung-ucd,png]
@@ -77,3 +144,23 @@ rectangle "Bibliotheksverwaltung" {
 @enduml
 ----
 
+== GUI-Entwurf
+
+[.vertical]
+=== Seite 1
+image::Page_1_1.png[align="center"]
+
+=== Seite 2
+image::Page_1_2.png[align="center"]
+
+=== Seite 3
+image::Page_1_3.png[align="center"]
+
+=== Seite 4
+image::Page_2_1.png[align="center"]
+
+=== Seite 5
+image::Page_2_2.png[align="center"]
+
+=== Seite 6
+image::Page_2_3.png[align="center"]
