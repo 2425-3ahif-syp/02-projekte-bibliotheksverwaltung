@@ -78,15 +78,15 @@ rectangle "Bibliotheksverwaltung" {
 @enduml
 ----
 
+== GUI-Entwurf
+
 [.title-slide]
 == GUI-Entwurf
 
-[.slide-background]
+[.background]
 == 
-+ 
-:revealjs_background_image: images/Seite_1.png
+:revealjs_background: images/Seite_1.png
 
-[.slide-background]
+[.background]
 == 
-+ 
-:revealjs_background_image: images/Seite_2.png
+:revealjs_background: images/Seite_2.png
