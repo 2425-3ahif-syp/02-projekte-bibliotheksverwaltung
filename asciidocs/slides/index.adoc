@@ -83,14 +83,30 @@ rectangle "Bibliotheksverwaltung" {
 [.title-slide]
 == GUI-Entwurf
 
-image::Seite_1.png[background]
+image::../Seite_1.png[background]
 
 
-image::Seite_2.png[background]
+image::../Seite_2.png[background]
 
-
+==
 image::../images/Seite_1.png[]
 
 
 image::../images/Seite_2.png[]
+
+==
+image::Seite_1.png[]
+
+image::Seite_2.png[]
+
+==
+.image::../images/Seite_1.png[]
+.image::../images/Seite_2.png[]
+
+==
+.image::Seite_1.png[]
+.image::Seite_2.png[]
+
+==
+image::Seite_1.png[background]
 
