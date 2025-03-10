@@ -10,6 +10,7 @@
 :revealjs_width: 1408
 :revealjs_height: 792
 :source-highlighter: highlightjs
+:revealjs_background_size: cover
 //:revealjs_parallaxBackgroundImage: images/background-landscape-light-orange.jpg
 //:revealjs_parallaxBackgroundSize: 4936px 2092px
 //:highlightjs-theme: css/atom-one-light.css
@@ -78,5 +79,14 @@ rectangle "Bibliotheksverwaltung" {
 ----
 
 == GUI-Entwurf
-image::../images/Seite_1.png[width=80%]
-image::../images/Seite_2.png[width=80%]
+
+[.title-slide]
+==
+
+[.background]
+== 
+:revealjs_background: images/Seite_1.png
+
+[.background]
+== 
+:revealjs_background: images/Seite_2.png
