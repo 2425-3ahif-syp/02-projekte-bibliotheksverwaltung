@@ -1,5 +1,5 @@
 
-== Userstorys
+== Userstories
 
 1. Als Bibliotheksmitarbeiter möchte ich neue Bücher in das System eintragen, damit sie für Benutzer zur Ausleihe verfügbar sind.
 

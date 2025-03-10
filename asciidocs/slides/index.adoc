@@ -34,7 +34,7 @@
 == Links
 link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/pflichtenheft/pflichtenheft.adoc[Pflichtenheft^] +
 link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/projektantrag/projektantrag.adoc[Projektantrag^] +
-link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/userstories.adoc[Userstorys^] +
+link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/userstories.adoc[Userstories^] +
 link:https://vm81.htl-leonding.ac.at/projects/4c9dca91-3a60-48be-b439-29c095c844e1[YouTrack^] +
 
 
