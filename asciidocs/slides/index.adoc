@@ -19,12 +19,14 @@
 :iconfont-name: fonts/fontawesome/css/all
 //:revealjs_parallaxBackgroundImage: background-landscape-light-orange.jpg
 //:revealjs_parallaxBackgroundSize: 4936px 2092px
-ifdef::env-ide[]
-:imagesdir: ../images
-endif::[]
-ifndef::env-ide[]
-:imagesdir: /images
-endif::[]
+//ifdef::env-ide[]
+//:imagesdir: ../images
+//endif::[]
+//ifndef::env-ide[]
+//:imagesdir: /images
+//endif::[]
+:imagesdir: slides/images
+:imagesdir: images
 //:revealjs_theme: sky
 //:title-slide-background-image: img.png
 :title-slide-transition-speed: fast
@@ -86,4 +88,3 @@ image::Seite_1.png[align="center"]
 
 == Seite 2
 image::Seite_2.png[align="center"]
-
