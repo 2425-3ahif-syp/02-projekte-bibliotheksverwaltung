@@ -78,35 +78,12 @@ rectangle "Bibliotheksverwaltung" {
 @enduml
 ----
 
-== GUI-Entwurf
-
 [.title-slide]
 == GUI-Entwurf
 
-image::../Seite_1.png[background]
+[background-image="slides/images/Seite_1.png"]
+== Seite 1
 
-
-image::../Seite_2.png[background]
-
-==
-image::../images/Seite_1.png[]
-
-
-image::../images/Seite_2.png[]
-
-==
-image::Seite_1.png[]
-
-image::Seite_2.png[]
-
-==
-.image::../images/Seite_1.png[]
-.image::../images/Seite_2.png[]
-
-==
-.image::Seite_1.png[]
-.image::Seite_2.png[]
-
-==
-image::Seite_1.png[background]
+[background-image="slides/images/Seite_2.png"]
+== Seite 2
 
