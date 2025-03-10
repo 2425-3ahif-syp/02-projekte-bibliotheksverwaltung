@@ -81,9 +81,9 @@ rectangle "Bibliotheksverwaltung" {
 [.title-slide]
 == GUI-Entwurf
 
-[background-image="slides/images/Seite_1.png"]
 == Seite 1
+image::Seite_1.png[align="center"]
 
-[background-image="slides/images/Seite_2.png"]
 == Seite 2
+image::Seite_2.png[align="center"]
 
