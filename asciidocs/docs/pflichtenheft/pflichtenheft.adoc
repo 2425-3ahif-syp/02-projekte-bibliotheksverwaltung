@@ -86,14 +86,4 @@ Verwendung von Linux
 
 Nicht zu komplex
 
-== Entwurf "Wie mache ich es"
-=== Systemarchitektur
-
-Datenbank: Speicherung von Buchdaten, Benutzerinformationen und Ausleihinformationen
-
-Logik: Java-Klassen für die Geschäftslogik (Buch, Benutzer, Ausleihe)
-
-Benutzeroberfläche: JavaFX zur Erstellung einer intuitiven Benutzeroberfläche
-
-
 
