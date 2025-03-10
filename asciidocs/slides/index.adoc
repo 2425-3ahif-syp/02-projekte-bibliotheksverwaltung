@@ -20,10 +20,10 @@
 //:revealjs_parallaxBackgroundImage: background-landscape-light-orange.jpg
 //:revealjs_parallaxBackgroundSize: 4936px 2092px
 ifdef::env-ide[]
-:imagesdir: ../images
+:imagesdir: ../slides/images
 endif::[]
 ifndef::env-ide[]
-:imagesdir: images
+:imagesdir: slides/images
 endif::[]
 //:revealjs_theme: sky
 //:title-slide-background-image: img.png
@@ -85,8 +85,8 @@ rectangle "Bibliotheksverwaltung" {
 
 [.background]
 == 
-:revealjs_background: images/Seite_1.png
+:revealjs_background_image: slides/images/Seite_1.png
 
 [.background]
 == 
-:revealjs_background: images/Seite_2.png
+:revealjs_background_image: slides/images/Seite_2.png
