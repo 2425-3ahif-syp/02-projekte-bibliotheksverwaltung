@@ -3,7 +3,8 @@
 ===== _2024/25 - 3AHIF - SYP_
 
 == Beschreibung
-Die Bibliotheksverwaltung ist ein Programm, das die Verwaltung von Büchern in einer Bibliothek ermöglicht. Es können Bücher hinzugefügt, gelöscht und bearbeitet werden. Außerdem können die Bücher in einer Liste angezeigt werden.
+Die Bibliotheksverwaltung ist ein Programm, das die Verwaltung von Büchern in einer Bibliothek erleichtert. Es können Bücher hinzugefügt und gelöscht werden. Außerdem kann die Statistik der Bücher eingesehen werden und Bücher können ausgeliehen und zurückgegeben werden. 
+
 
 == Teammitglieder
 * Simon Koller
@@ -16,3 +17,5 @@ link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/ma
 link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/projektantrag/projektantrag.adoc[Projektantrag^] +
 link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/userstories.adoc[Userstories^] +
 link:https://vm81.htl-leonding.ac.at/projects/4c9dca91-3a60-48be-b439-29c095c844e1[YouTrack^] +
+
+link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/wireframe.adoc[Wireframe^] +
