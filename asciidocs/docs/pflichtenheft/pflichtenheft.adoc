@@ -15,75 +15,63 @@ ifndef::imagesdir[:imagesdir: images]
 == Pflichtenheft "Was mache ich"
 
 
-=== Ausgangssituation
+== Ausgangssituation
+Die Bibliothek benötigt ein neues, digitales Verwaltungssystem, um ihre Bücher, Medien, Benutzerkonten und Ausleihvorgänge effizient zu organisieren.
+Dabei soll das System die Arbeitsabläufe für das Bibliothekspersonal optimieren und gleichzeitig den Nutzern eine einfache und bequeme Möglichkeit bieten, auf den Medienbestand zuzugreifen.
 
-In vielen Bibliotheken wird die Verwaltung von Büchern oft manuell durchgeführt. Dies ist zeitaufwendig und fehleranfällig.
+== Istzustand
+Der aktuelle Zustand der Bibliotheksverwaltung erfolgt größtenteils manuell, mit Excel-Tabellen oder unübersichtlichen, veralteten Datenbanken.
+Die Buchbestände sind schwer zu durchsuchen und zu verwalten, und es gibt keine effiziente Möglichkeit zur Analyse des Bestandes.
 
-=== Istzustand
+== Problemstellung
+Die manuelle Verwaltung führt zu folgenden Herausforderungen:
 
-Aktuell werden Bücher von manuellen Listen, Excel-Tabellen oder unübersichtlichen Datenbanken erfasst. Es fehlt an einer zentralen und effizienten Lösung zur Verwaltung von Buchdaten.
+* Fehleranfälligkeit und inkonsistente Daten
+* Lange Bearbeitungszeiten bei der Buchsuche und -verwaltung
+* Mangelnde Übersicht über den gesamten Bestand
+* Fehlende Möglichkeit zur schnellen Erstellung von Statistiken
 
-=== Problemstellung
-Die manuelle Verwaltung von Büchern führt zu folgenden Problemen:
+== Zielsetzung
+Das Ziel ist es, eine Software zur Verwaltung von Büchern zu entwickeln.
+Diese Lösung soll die Prozesse der Buchaufnahme, -suche und -verwaltung automatisieren und die Benutzerfreundlichkeit deutlich verbessern.
 
-Hohe Fehleranfälligkeit bei der Datenpflege
+== Anforderungen (Soll-Zustand)
+Es soll eine Anwendung entwickelt werden, die es ermöglicht:
 
-Schwierige Suche nach bestimmten Büchern
+* Bücher einfach und effizient zu erfassen.
+* Eine schnelle und präzise Buchsuche zu ermöglichen.
+* Statistiken über den Buchbestand zu erstellen.
+* Eine Ausleih- und Rückgabeverwaltung zu ermöglichen.
 
-Fehlende Übersicht über den gesamten Bestand
+=== Funktionale Anforderungen
 
-Kein automatisches Erstellen von Statistiken
+* **Erfassen von Büchern**: Die Anwendung ermöglicht es, neue Bücher in die Bibliothek aufzunehmen und die Buchdaten zu verwalten.
+* **Buchsuche**: Benutzer können Bücher anhand verschiedener Kriterien (Titel, Autor, Jahr, Kategorie) suchen.
+* **Ausleihen und Zurückgeben**: Benutzer können Bücher ausleihen und zurückgeben, wobei der Status stets aktuell bleibt.
+* **Statistik**: Die Anwendung generiert Statistiken über den Bestand, die Ausleihaktivitäten und die Nutzerhistorie.
+* **Nutzerprofile**: Jedes Nutzerprofil enthält Informationen zu ausgeliehenen und zurückgegebenen Büchern.
 
-=== Aufgabenstellung
+=== Nicht-funktionale Anforderungen (NFA)
 
-Entwicklung eines Programmes zur Verwaltung von Büchern
+* **Benutzerfreundliche Oberfläche**: Die Benutzeroberfläche soll intuitiv und einfach zu bedienen sein.
+* **Zuverlässigkeit**: Das System muss stabil und sicher arbeiten, insbesondere bei hoher Nutzung.
+* **Skalierbarkeit**: Die Software muss mit einer wachsenden Anzahl von Büchern und Nutzern skalierbar sein.
+* **Plattformunabhängigkeit**: Die Anwendung soll auf verschiedenen Betriebssystemen (Windows, macOS, Linux) laufen.
 
-Einfache Eingabe und Verwaltung von Buchdaten
+== Ziele
 
-Möglichkeit zur Suche nach Büchern anhand verschiedener Kriterien
+* **Effizienz**: Die Verwaltung der Bücher soll automatisiert werden, um Fehler zu minimieren und Zeit zu sparen.
+* **Benutzerfreundlichkeit**: Eine einfach zu bedienende Oberfläche soll den Benutzern die Nutzung der Anwendung erleichtern.
+* **Verfügbarkeit von Statistiken**: Es soll eine einfache Möglichkeit zur Erstellung von Statistiken über den gesamten Bestand sowie über Ausleihdaten und Nutzeraktivitäten geben.
 
-Erstellung von Statistiken über den Buchbestand
+== Mengengerüst
 
-==== Funktionale Anforderungen
+* **Anzahl der Bücher**: Die Bibliothek startet mit einem Bestand von etwa 10.000 Büchern.
+* **Anzahl der Benutzer**: Die Anwendung soll von etwa 100 gleichzeitigen Benutzern genutzt werden können.
 
-Erfassen von Büchern
+== Rahmenbedingungen
 
-Statistiken erstellen
+=== Technische Rahmenbedingungen
 
-Ausleihen und Zurückgeben von Büchern
-
-Reservierung von Büchern
-
-Erstellung von Nutzerprofilen mit Ausleihhistorie
-
-==== Nichtfunktionale Anforderungen (NFA)
-
-Benutzerfreundliche Oberfläche
-
-Stabilität und Sicherheit der Anwendung
-
-Skalierbarkeit für wachsende Buchbestände
-
-=== Ziele
-
-Effiziente und benutzerfreundliche Lösung zur Verwaltung von Büchern
-
-Automatisierung von Prozessen
-
-Verbesserung der Übersichtlichkeit und des Zugriffs auf Buchdaten
-
-=== Mengengerüst
-
-Initialer Buchbestand: 10000 Bücher
-
-Anzahl der Benutzer: 100
-
-=== Rahmenbedingungen
-
-Programmiersprache: Java
-
-Verwendung von Linux
-
-Nicht zu komplex
-
+* **Programmiersprache**: Java wird als Programmiersprache verwendet.
 
