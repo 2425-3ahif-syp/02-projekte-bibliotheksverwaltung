@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="author" content="Simon Koller, David Weißl-Fischer, Konstantin Wetscher">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Bibliotheksverwaltung</title>
+<title>Wireframe</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,204 +437,131 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Bibliotheksverwaltung</h1>
-<div class="details">
-<span id="author" class="author">Simon Koller, David Weißl-Fischer, Konstantin Wetscher</span><br>
-<span id="revnumber">version 1.0.0,</span>
-<span id="revdate">2025-03-17</span>
-<br><span id="revremark">Projektantrag</span>
-</div>
+<h1>Wireframe</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_pflichtenheft_was_mache_ich">1. Pflichtenheft "Was mache ich"</a></li>
-<li><a href="#_ausgangssituation">2. Ausgangssituation</a></li>
-<li><a href="#_istzustand">3. Istzustand</a></li>
-<li><a href="#_problemstellung">4. Problemstellung</a></li>
-<li><a href="#_zielsetzung">5. Zielsetzung</a></li>
-<li><a href="#_anforderungen_soll_zustand">6. Anforderungen (Soll-Zustand)</a>
 <ul class="sectlevel2">
-<li><a href="#_funktionale_anforderungen">6.1. Funktionale Anforderungen</a></li>
-<li><a href="#_nicht_funktionale_anforderungen_nfa">6.2. Nicht-funktionale Anforderungen (NFA)</a></li>
-</ul>
-</li>
-<li><a href="#_ziele">7. Ziele</a></li>
-<li><a href="#_mengengerüst">8. Mengengerüst</a></li>
-<li><a href="#_rahmenbedingungen">9. Rahmenbedingungen</a>
-<ul class="sectlevel2">
-<li><a href="#_technische_rahmenbedingungen">9.1. Technische Rahmenbedingungen</a></li>
-</ul>
-</li>
+<li><a href="#_1_hauptmenü">1. 1. Hauptmenü</a></li>
+<li><a href="#_2_benutzer_anlegen">2. 2. Benutzer Anlegen</a></li>
+<li><a href="#_3_verwaltung">3. 3. Verwaltung</a></li>
+<li><a href="#_4_statistik">4. 4. Statistik</a></li>
+<li><a href="#_5_ausleihen">5. 5. Ausleihen</a></li>
+<li><a href="#_übersicht">6. Übersicht</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_pflichtenheft_was_mache_ich"><a class="anchor" href="#_pflichtenheft_was_mache_ich"></a>1. Pflichtenheft "Was mache ich"</h2>
-<div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ausgangssituation"><a class="anchor" href="#_ausgangssituation"></a>2. Ausgangssituation</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Die Bibliothek benötigt ein neues, digitales Verwaltungssystem, um ihre Bücher, Medien, Benutzerkonten und Ausleihvorgänge effizient zu organisieren.
-Dabei soll das System die Arbeitsabläufe für das Bibliothekspersonal optimieren und gleichzeitig den Nutzern eine einfache und bequeme Möglichkeit bieten, auf den Medienbestand zuzugreifen.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_istzustand"><a class="anchor" href="#_istzustand"></a>3. Istzustand</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Der aktuelle Zustand der Bibliotheksverwaltung erfolgt größtenteils manuell, mit Excel-Tabellen oder unübersichtlichen, veralteten Datenbanken.
-Die Buchbestände sind schwer zu durchsuchen und zu verwalten, und es gibt keine effiziente Möglichkeit zur Analyse des Bestandes.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_problemstellung"><a class="anchor" href="#_problemstellung"></a>4. Problemstellung</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Die manuelle Verwaltung führt zu folgenden Herausforderungen:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Fehleranfälligkeit und inkonsistente Daten</p>
-</li>
-<li>
-<p>Lange Bearbeitungszeiten bei der Buchsuche und -verwaltung</p>
-</li>
-<li>
-<p>Mangelnde Übersicht über den gesamten Bestand</p>
-</li>
-<li>
-<p>Fehlende Möglichkeit zur schnellen Erstellung von Statistiken</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_zielsetzung"><a class="anchor" href="#_zielsetzung"></a>5. Zielsetzung</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Das Ziel ist es, eine Software zur Verwaltung von Büchern zu entwickeln.
-Diese Lösung soll die Prozesse der Buchaufnahme, -suche und -verwaltung automatisieren und die Benutzerfreundlichkeit deutlich verbessern.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_anforderungen_soll_zustand"><a class="anchor" href="#_anforderungen_soll_zustand"></a>6. Anforderungen (Soll-Zustand)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Es soll eine Anwendung entwickelt werden, die es ermöglicht:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Bücher einfach und effizient zu erfassen.</p>
-</li>
-<li>
-<p>Eine schnelle und präzise Buchsuche zu ermöglichen.</p>
-</li>
-<li>
-<p>Statistiken über den Buchbestand zu erstellen.</p>
-</li>
-<li>
-<p>Eine Ausleih- und Rückgabeverwaltung zu ermöglichen.</p>
-</li>
-</ul>
-</div>
 <div class="sect2">
-<h3 id="_funktionale_anforderungen"><a class="anchor" href="#_funktionale_anforderungen"></a>6.1. Funktionale Anforderungen</h3>
+<h3 id="_1_hauptmenü"><a class="anchor" href="#_1_hauptmenü"></a>1. 1. Hauptmenü</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/hauptmenu.png" alt="hauptmenu">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ermöglichung der Auswahl von 5 verschiedenen Menüpunkten:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Erfassen von Büchern</strong>: Die Anwendung ermöglicht es, neue Bücher in die Bibliothek aufzunehmen und die Buchdaten zu verwalten.</p>
+<p>Benutzer Anlegen</p>
 </li>
 <li>
-<p><strong>Buchsuche</strong>: Benutzer können Bücher anhand verschiedener Kriterien (Titel, Autor, Jahr, Kategorie) suchen.</p>
+<p>Statistik</p>
 </li>
 <li>
-<p><strong>Ausleihen und Zurückgeben</strong>: Benutzer können Bücher ausleihen und zurückgeben, wobei der Status stets aktuell bleibt.</p>
+<p>Verwaltung</p>
 </li>
 <li>
-<p><strong>Statistik</strong>: Die Anwendung generiert Statistiken über den Bestand, die Ausleihaktivitäten und die Nutzerhistorie.</p>
-</li>
-<li>
-<p><strong>Nutzerprofile</strong>: Jedes Nutzerprofil enthält Informationen zu ausgeliehenen und zurückgegebenen Büchern.</p>
+<p>Ausleihe</p>
 </li>
 </ul>
+</div>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nicht_funktionale_anforderungen_nfa"><a class="anchor" href="#_nicht_funktionale_anforderungen_nfa"></a>6.2. Nicht-funktionale Anforderungen (NFA)</h3>
-<div class="ulist">
-<ul>
+<h3 id="_2_benutzer_anlegen"><a class="anchor" href="#_2_benutzer_anlegen"></a>2. 2. Benutzer Anlegen</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/benutzer_anlegen.png" alt="benutzer anlegen">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p><strong>Benutzerfreundliche Oberfläche</strong>: Die Benutzeroberfläche soll intuitiv und einfach zu bedienen sein.</p>
+<p>Ermöglicht das Anlegen eines neuen Benutzers</p>
 </li>
 <li>
-<p><strong>Zuverlässigkeit</strong>: Das System muss stabil und sicher arbeiten, insbesondere bei hoher Nutzung.</p>
+<p>Eingabe von Vorname, Nachname, Geburtsdatum, Adresse</p>
 </li>
 <li>
-<p><strong>Skalierbarkeit</strong>: Die Software muss mit einer wachsenden Anzahl von Büchern und Nutzern skalierbar sein.</p>
+<p>Bestätigen</p>
 </li>
-<li>
-<p><strong>Plattformunabhängigkeit</strong>: Die Anwendung soll auf verschiedenen Betriebssystemen (Windows, macOS, Linux) laufen.</p>
-</li>
-</ul>
+</ol>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ziele"><a class="anchor" href="#_ziele"></a>7. Ziele</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Effizienz</strong>: Die Verwaltung der Bücher soll automatisiert werden, um Fehler zu minimieren und Zeit zu sparen.</p>
-</li>
-<li>
-<p><strong>Benutzerfreundlichkeit</strong>: Eine einfach zu bedienende Oberfläche soll den Benutzern die Nutzung der Anwendung erleichtern.</p>
-</li>
-<li>
-<p><strong>Verfügbarkeit von Statistiken</strong>: Es soll eine einfache Möglichkeit zur Erstellung von Statistiken über den gesamten Bestand sowie über Ausleihdaten und Nutzeraktivitäten geben.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_mengengerüst"><a class="anchor" href="#_mengengerüst"></a>8. Mengengerüst</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Anzahl der Bücher</strong>: Die Bibliothek startet mit einem Bestand von etwa 10.000 Büchern.</p>
-</li>
-<li>
-<p><strong>Anzahl der Benutzer</strong>: Die Anwendung soll von etwa 100 gleichzeitigen Benutzern genutzt werden können.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rahmenbedingungen"><a class="anchor" href="#_rahmenbedingungen"></a>9. Rahmenbedingungen</h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_technische_rahmenbedingungen"><a class="anchor" href="#_technische_rahmenbedingungen"></a>9.1. Technische Rahmenbedingungen</h3>
-<div class="ulist">
-<ul>
+<h3 id="_3_verwaltung"><a class="anchor" href="#_3_verwaltung"></a>3. 3. Verwaltung</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/verwaltung2.png" alt="verwaltung2">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p><strong>Programmiersprache</strong>: Java wird als Programmiersprache verwendet.</p>
+<p>Ermöglicht das Anlegen, Bearbeiten und Löschen von Büchern für Admins</p>
 </li>
-</ul>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_statistik"><a class="anchor" href="#_4_statistik"></a>4. 4. Statistik</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/statistik1.png" alt="statistik1">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/statistik2.png" alt="statistik2">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Zeigt die Bücher geordnet nach Beliebtheit an</p>
+</li>
+<li>
+<p>Details zeigt genaueres über die Bücher an</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_ausleihen"><a class="anchor" href="#_5_ausleihen"></a>5. 5. Ausleihen</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/ausleihen.png" alt="ausleihen">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ermöglicht das Ausleihen von Büchern für Benutzer</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_übersicht"><a class="anchor" href="#_übersicht"></a>6. Übersicht</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/images/uebersicht.png" alt="uebersicht">
 </div>
 </div>
 </div>
@@ -643,7 +569,6 @@ Diese Lösung soll die Prozesse der Buchaufnahme, -suche und -verwaltung automat
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.0<br>
 Last updated 2025-03-17 22:48:58 UTC
 </div>
 </div>
