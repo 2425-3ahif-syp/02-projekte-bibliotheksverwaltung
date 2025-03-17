@@ -1,0 +1,51 @@
+= Wireframe
+
+=== 1. Hauptmenü
+
+
+image::images/hauptmenu.png[]
+
+1. Ermöglichung der Auswahl von 5 verschiedenen Menüpunkten:
+    * Benutzer Anlegen
+    * Statistik
+    * Verwaltung
+    * Ausleihe
+
+=== 2. Benutzer Anlegen
+
+image::images/benutzer_anlegen.png[]
+
+1. Ermöglicht das Anlegen eines neuen Benutzers
+2. Eingabe von Vorname, Nachname, Geburtsdatum, Adresse
+3. Bestätigen
+
+=== 3. Verwaltung
+
+image::images/verwaltung2.png[]
+
+1. Ermöglicht das Anlegen, Bearbeiten und Löschen von Büchern für Admins
+
+=== 4. Statistik
+
+image::images/statistik1.png[]
+
+image::images/statistik2.png[]
+
+1. Zeigt die Bücher geordnet nach Beliebtheit an
+2. Details zeigt genaueres über die Bücher an
+
+=== 5. Ausleihen
+
+image::images/ausleihen.png[]
+
+1. Ermöglicht das Ausleihen von Büchern für Benutzer
+
+
+== Übersicht
+
+
+image::images/uebersicht.png[]
+
+
+
+
