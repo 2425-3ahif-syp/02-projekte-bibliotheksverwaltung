@@ -34,9 +34,10 @@
 == Links
 link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/Pflichtenheft/pflichtenheft.adoc[Pflichtenheft^] +
 link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/Projektantrag/projektantrag.adoc[Projektantrag^] +
-link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/Userstorys.adoc[Userstorys^] +
+link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/userstorys.adoc[Userstorys^] +
 link:https://vm81.htl-leonding.ac.at/projects/4c9dca91-3a60-48be-b439-29c095c844e1[YouTrack^] +
 
+link:https://github.com/2425-3ahif-syp/02-projekte-bibliotheksverwaltung/blob/main/asciidocs/docs/wireframe.adoc[Wireframe^] +
 
 == Pflichtenheft "Was mache ich"
 
