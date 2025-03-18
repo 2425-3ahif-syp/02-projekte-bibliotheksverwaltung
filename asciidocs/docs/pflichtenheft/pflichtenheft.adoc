@@ -26,7 +26,6 @@ Die Buchbestände sind schwer zu durchsuchen und zu verwalten, und es gibt keine
 == Problemstellung
 Die manuelle Verwaltung führt zu folgenden Herausforderungen:
 
-* Fehleranfälligkeit und inkonsistente Daten
 * Lange Bearbeitungszeiten bei der Buchsuche und -verwaltung
 * Mangelnde Übersicht über den gesamten Bestand
 * Fehlende Möglichkeit zur schnellen Erstellung von Statistiken
