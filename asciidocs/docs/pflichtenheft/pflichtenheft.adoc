@@ -53,7 +53,7 @@ Es soll eine Anwendung entwickelt werden, die es ermöglicht:
 
 === Nicht-funktionale Anforderungen (NFA)
 
-* **Benutzerfreundliche Oberfläche**: Die Benutzeroberfläche soll intuitiv und einfach zu bedienen sein.
+* **Benutzerfreundliche Oberfläche**: Die Benutzeroberfläche soll übersichtlich und einfach zu bedienen sein.
 * **Zuverlässigkeit**: Das System muss stabil und sicher arbeiten, insbesondere bei hoher Nutzung.
 * **Skalierbarkeit**: Die Software muss mit einer wachsenden Anzahl von Büchern und Nutzern skalierbar sein.
 * **Plattformunabhängigkeit**: Die Anwendung soll auf verschiedenen Betriebssystemen (Windows, macOS, Linux) laufen.
@@ -70,8 +70,6 @@ Es soll eine Anwendung entwickelt werden, die es ermöglicht:
 * **Anzahl der Benutzer**: Die Anwendung soll von etwa 100 gleichzeitigen Benutzern genutzt werden können.
 
 == Rahmenbedingungen
-
-=== Technische Rahmenbedingungen
 
 * **Programmiersprache**: Java wird als Programmiersprache verwendet.
 
