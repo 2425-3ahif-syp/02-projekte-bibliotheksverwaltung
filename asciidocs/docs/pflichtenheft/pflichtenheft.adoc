@@ -20,7 +20,7 @@ Die Bibliothek benötigt ein neues, digitales Verwaltungssystem, um ihre Bücher
 Dabei soll das System die Arbeitsabläufe für das Bibliothekspersonal optimieren und gleichzeitig den Nutzern eine einfache und bequeme Möglichkeit bieten, auf den Bücherbestand zuzugreifen.
 
 === Istzustand
-Der aktuelle Zustand der Bibliotheksverwaltung erfolgt größtenteils manuell, mit Excel-Tabellen.
+Aktuell wird die Bibliothek größtenteils manuell, mit Excel-Tabellen verwaltet.
 Die Buchbestände sind schwer zu durchsuchen und zu verwalten, und es gibt keine effiziente Möglichkeit zur Analyse des Bestandes.
 
 === Problemstellung
@@ -32,7 +32,7 @@ Die manuelle Verwaltung führt zu folgenden Herausforderungen:
 
 === Zielsetzung
 Das Ziel ist es, eine Software zur Verwaltung von Büchern zu entwickeln.
-Diese Lösung soll die Prozesse der Buchaufnahme, -suche und -verwaltung automatisieren und die Benutzerfreundlichkeit deutlich verbessern.
+Diese Lösung soll die Prozesse der Buchaufnahme, -suche und -verwaltung beschleunigen und die Benutzerfreundlichkeit deutlich verbessern.
 
 === Anforderungen (Soll-Zustand)
 Es soll eine Anwendung entwickelt werden, die es ermöglicht:
@@ -59,7 +59,7 @@ Es soll eine Anwendung entwickelt werden, die es ermöglicht:
 
 === Ziele
 
-* **Effizienz**: Die Verwaltung der Bücher soll automatisiert werden, um Fehler zu minimieren und Zeit zu sparen.
+* **Effizienz**: Die Verwaltung der Bücher soll beschleunigt werden, um Fehler zu minimieren und Zeit zu sparen.
 * **Benutzerfreundlichkeit**: Eine einfach zu bedienende Oberfläche soll den Benutzern die Nutzung der Anwendung erleichtern.
 * **Verfügbarkeit von Statistiken**: Es soll eine einfache Möglichkeit zur Erstellung von Statistiken über den gesamten Bestand sowie über Ausleihdaten und Nutzeraktivitäten geben.
 
