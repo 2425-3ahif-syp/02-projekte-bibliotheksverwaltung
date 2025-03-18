@@ -16,11 +16,11 @@ ifndef::imagesdir[:imagesdir: images]
 
 
 == Ausgangssituation
-Die Bibliothek benötigt ein neues, digitales Verwaltungssystem, um ihre Bücher, Medien, Benutzerkonten und Ausleihvorgänge effizient zu organisieren.
-Dabei soll das System die Arbeitsabläufe für das Bibliothekspersonal optimieren und gleichzeitig den Nutzern eine einfache und bequeme Möglichkeit bieten, auf den Medienbestand zuzugreifen.
+Die Bibliothek benötigt ein neues, digitales Verwaltungssystem, um ihre Bücher, Benutzerkonten und Ausleihvorgänge effizient zu organisieren.
+Dabei soll das System die Arbeitsabläufe für das Bibliothekspersonal optimieren und gleichzeitig den Nutzern eine einfache und bequeme Möglichkeit bieten, auf den Bücherbestand zuzugreifen.
 
 == Istzustand
-Der aktuelle Zustand der Bibliotheksverwaltung erfolgt größtenteils manuell, mit Excel-Tabellen oder unübersichtlichen, veralteten Datenbanken.
+Der aktuelle Zustand der Bibliotheksverwaltung erfolgt größtenteils manuell, mit Excel-Tabellen.
 Die Buchbestände sind schwer zu durchsuchen und zu verwalten, und es gibt keine effiziente Möglichkeit zur Analyse des Bestandes.
 
 == Problemstellung
