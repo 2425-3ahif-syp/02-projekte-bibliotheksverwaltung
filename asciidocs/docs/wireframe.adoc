@@ -10,14 +10,16 @@ image::images/hauptmenu.png[]
     * Statistik
     * Verwaltung
     * Ausleihe
+    * Rückgabe
 
-=== 2. Benutzer Anlegen
+=== 2. Kunde Anlegen
 
-image::images/benutzer_anlegen.png[]
+image::images/kunde_anlegen.png[]
 
-1. Ermöglicht das Anlegen eines neuen Benutzers
+1. Ermöglicht das Anlegen eines Kunden
 2. Eingabe von Vorname, Nachname, Geburtsdatum, Adresse
 3. Bestätigen
+4. Jeder Kunde ist mit einem Bibliotheksausweis (Barcode in Wireframe) ausgestattet
 
 === 3. Verwaltung
 
@@ -39,6 +41,11 @@ image::images/statistik2.png[]
 image::images/ausleihen.png[]
 
 1. Ermöglicht das Ausleihen von Büchern für Benutzer
+
+=== 6. Rückgabe
+image::images/rueckgabe.png[]
+
+1. Ermöglicht die Rückgabe von ausgeliehene Büchern für Benutzer
 
 
 == Übersicht
