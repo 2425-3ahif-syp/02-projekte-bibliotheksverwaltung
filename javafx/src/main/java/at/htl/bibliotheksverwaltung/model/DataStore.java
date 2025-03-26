@@ -21,12 +21,12 @@ public class DataStore {
         books.add(new Book("Don Carlos", 1, false, ""));
 
         // Beispiel-Kunden
-        customers.add(new Customer(nextCustomerId++, "Max", "Mustermann"));
-        customers.add(new Customer(nextCustomerId++, "Erika", "Musterfrau"));
+        customers.add(new Customer(nextCustomerId++, "Max", "Mustermann", "1", "1", "2000", "Musterstraße 1", "1234", "Musterstadt"));
+        customers.add(new Customer(nextCustomerId++, "Erika", "Musterfrau", "2", "2", "2001", "Musterstraße 2", "1234", "Musterstadt"));
     }
 
-    public static void addCustomer(String firstName, String lastName) {
-        customers.add(new Customer(nextCustomerId++, firstName, lastName));
+    public static void addCustomer(String firstName, String lastName, String birthDay, String birthMonth, String birthYear, String street, String plz, String region) {
+        customers.add(new Customer(nextCustomerId++, firstName, lastName, birthDay, birthMonth, birthYear, street, plz, region));
     }
 
     public static void addBook(String title, int rating) {

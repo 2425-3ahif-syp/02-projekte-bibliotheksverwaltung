@@ -15,6 +15,12 @@ public class KundeAnlegen {
     private VBox root;
     private TextField firstNameField;
     private TextField lastNameField;
+    private TextField birthDayField;
+    private TextField birthMonthField;
+    private TextField birthYearField;
+    private TextField streetField;
+    private TextField plzField;
+    private TextField regionField;
     private Label infoLabel;
 
     public VBox getView() {
@@ -31,12 +37,35 @@ public class KundeAnlegen {
         lastNameField = new TextField();
         lastNameField.setPromptText("Nachname");
 
+        HBox nameBox = new HBox(10, firstNameField, lastNameField);
+        nameBox.setAlignment(Pos.CENTER_LEFT);
+
+        birthDayField = new TextField();
+        birthDayField.setPromptText("Tag");
+        birthMonthField = new TextField();
+        birthMonthField.setPromptText("Monat");
+        birthYearField = new TextField();
+        birthYearField.setPromptText("Jahr");
+
+        HBox birthBox = new HBox(10, birthDayField, birthMonthField, birthYearField);
+        birthBox.setAlignment(Pos.CENTER_LEFT);
+
+        streetField = new TextField();
+        streetField.setPromptText("Straße");
+        plzField = new TextField();
+        plzField.setPromptText("PLZ");
+        regionField = new TextField();
+        regionField.setPromptText("Region");
+
+        HBox addressBox = new HBox(10, streetField, plzField, regionField);
+        addressBox.setAlignment(Pos.CENTER_LEFT);
+
         Button addButton = new Button("Hinzufügen");
         addButton.setOnAction(e -> addCustomer());
 
         infoLabel = new Label();
 
-        VBox formBox = new VBox(10, firstNameField, lastNameField, addButton, infoLabel);
+        VBox formBox = new VBox(10, firstNameField, lastNameField, birthBox, addressBox, regionField, addButton, infoLabel);
         formBox.setAlignment(Pos.CENTER_LEFT);
 
         root.getChildren().add(formBox);
@@ -46,18 +75,30 @@ public class KundeAnlegen {
     private void addCustomer() {
         String first = firstNameField.getText().trim();
         String last = lastNameField.getText().trim();
+        String birthDay = birthDayField.getText().trim();
+        String birthMonth = birthMonthField.getText().trim();
+        String birthYear = birthYearField.getText().trim();
+        String street = streetField.getText().trim();
+        String plz = plzField.getText().trim();
+        String region = regionField.getText().trim();
 
-        if (first.isEmpty() || last.isEmpty()) {
-            infoLabel.setText("Bitte Vor- und Nachname eingeben!");
+        if (first.isEmpty() || last.isEmpty() || birthDay.isEmpty() || birthMonth.isEmpty() || birthYear.isEmpty() || street.isEmpty() || plz.isEmpty() || region.isEmpty()) {
+            infoLabel.setText("Bitte alle Felder ausfüllen!");
             return;
         }
 
-        DataStore.addCustomer(first, last);
+        DataStore.addCustomer(first, last, birthDay, birthMonth, birthYear, street, plz, region);
         infoLabel.setText("Kunde erfolgreich hinzugefügt!");
 
         // Felder leeren
         firstNameField.clear();
         lastNameField.clear();
+        birthDayField.clear();
+        birthMonthField.clear();
+        birthYearField.clear();
+        streetField.clear();
+        plzField.clear();
+        regionField.clear();
     }
 
     private HBox createTopBar(String titleText) {
