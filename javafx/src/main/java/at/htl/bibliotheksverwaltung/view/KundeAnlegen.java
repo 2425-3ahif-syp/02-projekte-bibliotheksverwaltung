@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class KundeAnlegen {
@@ -106,17 +108,23 @@ public class KundeAnlegen {
         topBar.setPadding(new Insets(10));
         topBar.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #ccc;");
 
-        Label homeIcon = new Label("\u2302"); // Home
+        Label homeIcon = new Label("\u2302");
         homeIcon.setStyle("-fx-font-size: 20;");
         homeIcon.setOnMouseClicked(e -> SceneManager.setView(new MainMenu().getView()));
 
         Label title = new Label(titleText);
         title.setStyle("-fx-font-size: 18;");
 
-        Label userIcon = new Label("\uD83D\uDC64"); // User
+        Label userIcon = new Label("\uD83D\uDC64");
         userIcon.setStyle("-fx-font-size: 20;");
 
-        topBar.getChildren().addAll(homeIcon, title, userIcon);
+        Region spacer1 = new Region();
+        HBox.setHgrow(spacer1, Priority.ALWAYS);
+
+        Region spacer2 = new Region();
+        HBox.setHgrow(spacer2, Priority.ALWAYS);
+
+        topBar.getChildren().addAll(homeIcon, spacer1, title, spacer2, userIcon);
         return topBar;
     }
 }

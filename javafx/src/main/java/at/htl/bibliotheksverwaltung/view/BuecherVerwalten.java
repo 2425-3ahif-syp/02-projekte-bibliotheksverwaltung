@@ -132,7 +132,13 @@ public class BuecherVerwalten {
         Label userIcon = new Label("\uD83D\uDC64");
         userIcon.setStyle("-fx-font-size: 20;");
 
-        topBar.getChildren().addAll(homeIcon, title, userIcon);
+        Region spacer1 = new Region();
+        HBox.setHgrow(spacer1, Priority.ALWAYS);
+
+        Region spacer2 = new Region();
+        HBox.setHgrow(spacer2, Priority.ALWAYS);
+
+        topBar.getChildren().addAll(homeIcon, spacer1, title, spacer2, userIcon);
         return topBar;
     }
 }

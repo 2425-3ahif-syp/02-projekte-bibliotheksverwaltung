@@ -7,6 +7,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -115,7 +117,13 @@ public class BuchRueckgabe {
         Label userIcon = new Label("\uD83D\uDC64");
         userIcon.setStyle("-fx-font-size: 20;");
 
-        topBar.getChildren().addAll(homeIcon, title, userIcon);
+        Region spacer1 = new Region();
+        HBox.setHgrow(spacer1, Priority.ALWAYS);
+
+        Region spacer2 = new Region();
+        HBox.setHgrow(spacer2, Priority.ALWAYS);
+
+        topBar.getChildren().addAll(homeIcon, spacer1, title, spacer2, userIcon);
         return topBar;
     }
 }

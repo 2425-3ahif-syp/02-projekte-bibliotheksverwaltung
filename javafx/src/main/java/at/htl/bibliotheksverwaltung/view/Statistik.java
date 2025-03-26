@@ -4,7 +4,10 @@ import at.htl.bibliotheksverwaltung.controller.SceneManager;
 import javafx.geometry.Insets;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class Statistik {
@@ -60,20 +63,23 @@ public class Statistik {
         topBar.setPadding(new Insets(10));
         topBar.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #ccc;");
 
-        // Home-Icon
-        javafx.scene.control.Label homeIcon = new javafx.scene.control.Label("\u2302");
+        Label homeIcon = new Label("\u2302");
         homeIcon.setStyle("-fx-font-size: 20;");
         homeIcon.setOnMouseClicked(e -> SceneManager.setView(new MainMenu().getView()));
 
-        // Titel
-        javafx.scene.control.Label title = new javafx.scene.control.Label(titleText);
+        Label title = new Label(titleText);
         title.setStyle("-fx-font-size: 18;");
 
-        // User-Icon
-        javafx.scene.control.Label userIcon = new javafx.scene.control.Label("\uD83D\uDC64");
+        Label userIcon = new Label("\uD83D\uDC64");
         userIcon.setStyle("-fx-font-size: 20;");
 
-        topBar.getChildren().addAll(homeIcon, title, userIcon);
+        Region spacer1 = new Region();
+        HBox.setHgrow(spacer1, Priority.ALWAYS);
+
+        Region spacer2 = new Region();
+        HBox.setHgrow(spacer2, Priority.ALWAYS);
+
+        topBar.getChildren().addAll(homeIcon, spacer1, title, spacer2, userIcon);
         return topBar;
     }
 }
