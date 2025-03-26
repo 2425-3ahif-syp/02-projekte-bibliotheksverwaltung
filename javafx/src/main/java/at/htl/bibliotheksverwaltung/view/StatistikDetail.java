@@ -109,13 +109,13 @@ public class StatistikDetail {
         homeIcon.setOnMouseClicked(e -> SceneManager.setView(new MainMenu().getView()));
 
         Label home = new Label("Home");
-        home.setStyle("-fx-font-size: 16;");
+        home.setStyle("-fx-font-size: 18;");
 
         Label title = new Label(titleText);
         title.setStyle("-fx-font-size: 18;");
 
         Label profile = new Label("Profil");
-        profile.setStyle("-fx-font-size: 16;");
+        profile.setStyle("-fx-font-size: 18;");
 
         Label userIcon = new Label("\uD83D\uDC64");
         userIcon.setStyle("-fx-font-size: 20;");
