@@ -43,11 +43,11 @@ public class KundeAnlegen {
         nameBox.setAlignment(Pos.CENTER_LEFT);
 
         birthDayField = new TextField();
-        birthDayField.setPromptText("Tag");
+        birthDayField.setPromptText("Geburtstag");
         birthMonthField = new TextField();
-        birthMonthField.setPromptText("Monat");
+        birthMonthField.setPromptText("Geburtsmonat");
         birthYearField = new TextField();
-        birthYearField.setPromptText("Jahr");
+        birthYearField.setPromptText("Geburtsjahr");
 
         HBox birthBox = new HBox(10, birthDayField, birthMonthField, birthYearField);
         birthBox.setAlignment(Pos.CENTER_LEFT);
