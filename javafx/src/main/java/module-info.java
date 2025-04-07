@@ -1,6 +1,7 @@
 module at.htl.bibliotheksverwaltung {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
     // Wenn du FXML-Controller per Reflection lädst, brauchst du "opens"
     opens at.htl.bibliotheksverwaltung.controller to javafx.fxml;
