@@ -1,7 +1,7 @@
 package at.htl.bibliotheksverwaltung.view;
 
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
-import at.htl.bibliotheksverwaltung.model.DataStore;
+import at.htl.bibliotheksverwaltung.database.DatabaseManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -84,12 +84,34 @@ public class KundeAnlegen {
         String plz = plzField.getText().trim();
         String region = regionField.getText().trim();
 
-        if (first.isEmpty() || last.isEmpty() || birthDay.isEmpty() || birthMonth.isEmpty() || birthYear.isEmpty() || street.isEmpty() || plz.isEmpty() || region.isEmpty()) {
+        if (first.isEmpty() || last.isEmpty() || birthDay.isEmpty() || birthMonth.isEmpty()
+                || birthYear.isEmpty() || street.isEmpty() || plz.isEmpty() || region.isEmpty()) {
             infoLabel.setText("Bitte alle Felder ausfüllen!");
             return;
         }
 
-        DataStore.addCustomer(first, last, birthDay, birthMonth, birthYear, street, plz, region);
+        if (!birthDay.matches("\\d{1,2}") || Integer.parseInt(birthDay) < 1 || Integer.parseInt(birthDay) > 31) {
+            infoLabel.setText("Ungültiger Geburtstag (1–31).");
+            return;
+        }
+
+        if (!birthMonth.matches("\\d{1,2}") || Integer.parseInt(birthMonth) < 1 || Integer.parseInt(birthMonth) > 12) {
+            infoLabel.setText("Ungültiger Geburtsmonat (1–12).");
+            return;
+        }
+
+        if (!birthYear.matches("\\d{4}") || Integer.parseInt(birthYear) < 1900 || Integer.parseInt(birthYear) > 2025) {
+            infoLabel.setText("Ungültiges Geburtsjahr (1900–2025).");
+            return;
+        }
+
+        if (!plz.matches("\\d+")) {
+            infoLabel.setText("PLZ darf nur Zahlen enthalten.");
+            return;
+        }
+
+        // All inputs valid — insert into DB
+        DatabaseManager.getInstance().addCustomer(first, last, birthDay, birthMonth, birthYear, street, plz, region);
         infoLabel.setText("Kunde erfolgreich hinzugefügt!");
 
         // Felder leeren
@@ -102,6 +124,7 @@ public class KundeAnlegen {
         plzField.clear();
         regionField.clear();
     }
+
 
     private HBox createTopBar(String titleText) {
         HBox topBar = new HBox(20);
@@ -130,7 +153,7 @@ public class KundeAnlegen {
         Region spacer2 = new Region();
         HBox.setHgrow(spacer2, Priority.ALWAYS);
 
-        topBar.getChildren().addAll(homeIcon,home , spacer1, title, spacer2, profile, userIcon);
+        topBar.getChildren().addAll(homeIcon, home, spacer1, title, spacer2, profile, userIcon);
         return topBar;
     }
 }

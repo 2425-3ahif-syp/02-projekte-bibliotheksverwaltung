@@ -9,8 +9,8 @@ import java.util.List;
 
 public class DatabaseManager {
     private static final String URL = "jdbc:h2:./librarydb";
-    private static final String USERNAME = "sa";
-    private static final String PASSWORD = "";
+    private static final String USERNAME = "test";
+    private static final String PASSWORD = "test";
 
     private static DatabaseManager instance;
     private Connection connection;
@@ -159,8 +159,6 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
-
-    // CRUD: Customers
 
     public List<Customer> getAllCustomers() {
         List<Customer> customers = new ArrayList<>();

@@ -1,8 +1,8 @@
 package at.htl.bibliotheksverwaltung.view;
 
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
+import at.htl.bibliotheksverwaltung.database.DatabaseManager;
 import at.htl.bibliotheksverwaltung.model.Book;
-import at.htl.bibliotheksverwaltung.model.DataStore;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -53,9 +53,8 @@ public class BuecherVerwalten {
 
     private void searchBooks() {
         String query = searchField.getText().trim().toLowerCase();
-
-        // Alle Bücher, deren Titel den Suchbegriff enthält
-        List<Book> found = DataStore.books.stream()
+        // Retrieve all books from the database and filter by title
+        List<Book> found = DatabaseManager.getInstance().getAllBooks().stream()
                 .filter(b -> b.getTitle().toLowerCase().contains(query))
                 .collect(Collectors.toList());
 
@@ -83,13 +82,11 @@ public class BuecherVerwalten {
         Label stars = new Label(getStarString(book.getRating()));
         stars.setStyle("-fx-text-fill: orange;");
 
-        // Zeigt "Ausgeliehen (bis ...)" oder nichts
         Label status = new Label();
         if (book.isBorrowed()) {
             status.setText("Ausgeliehen (bis " + book.getDueDate() + ")");
         }
 
-        // "Löschen"-Button
         Button deleteBtn = new Button("Löschen");
         deleteBtn.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;");
         deleteBtn.setOnAction(e -> deleteBook(book));
@@ -99,13 +96,12 @@ public class BuecherVerwalten {
     }
 
     private void deleteBook(Book book) {
-        DataStore.books.remove(book);
+        DatabaseManager.getInstance().deleteBook(book);
         searchBooks(); // Liste aktualisieren
     }
 
     private void addNewBook() {
-        // Beispiel: Füge ein neues Buch hinzu
-        DataStore.addBook("Neues Buch " + System.currentTimeMillis(), 3);
+        DatabaseManager.getInstance().addBook("Neues Buch " + System.currentTimeMillis(), 3);
         searchBooks();
     }
 
@@ -144,7 +140,7 @@ public class BuecherVerwalten {
         Region spacer2 = new Region();
         HBox.setHgrow(spacer2, Priority.ALWAYS);
 
-        topBar.getChildren().addAll(homeIcon,home , spacer1, title, spacer2, profile, userIcon);
+        topBar.getChildren().addAll(homeIcon, home, spacer1, title, spacer2, profile, userIcon);
         return topBar;
     }
 }

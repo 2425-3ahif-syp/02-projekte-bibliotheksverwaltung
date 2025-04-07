@@ -1,8 +1,8 @@
 package at.htl.bibliotheksverwaltung.view;
 
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
+import at.htl.bibliotheksverwaltung.database.DatabaseManager;
 import at.htl.bibliotheksverwaltung.model.Book;
-import at.htl.bibliotheksverwaltung.model.DataStore;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -48,8 +48,8 @@ public class BuchRueckgabe {
 
     private void searchBooks() {
         String query = searchField.getText().trim().toLowerCase();
-
-        List<Book> borrowed = DataStore.books.stream()
+        // Retrieve all books and filter for those currently borrowed
+        List<Book> borrowed = DatabaseManager.getInstance().getAllBooks().stream()
                 .filter(Book::isBorrowed)
                 .filter(b -> b.getTitle().toLowerCase().contains(query))
                 .collect(Collectors.toList());
@@ -91,6 +91,7 @@ public class BuchRueckgabe {
     private void returnBook(Book book) {
         book.setBorrowed(false);
         book.setDueDate("");
+        DatabaseManager.getInstance().updateBook(book);
         searchBooks();
     }
 
@@ -129,7 +130,7 @@ public class BuchRueckgabe {
         Region spacer2 = new Region();
         HBox.setHgrow(spacer2, Priority.ALWAYS);
 
-        topBar.getChildren().addAll(homeIcon,home , spacer1, title, spacer2, profile, userIcon);
+        topBar.getChildren().addAll(homeIcon, home, spacer1, title, spacer2, profile, userIcon);
         return topBar;
     }
 }

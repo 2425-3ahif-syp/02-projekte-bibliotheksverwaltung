@@ -1,20 +1,22 @@
 package at.htl.bibliotheksverwaltung;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
+import at.htl.bibliotheksverwaltung.database.DatabaseManager;
 import at.htl.bibliotheksverwaltung.view.MainMenu;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // SceneManager initialisieren (legt ein BorderPane + Scene an)
+        // Start and initialize the database
+        DatabaseManager.getInstance();
+
+        // Initialize SceneManager (creates scene and main layout)
         SceneManager.init(primaryStage);
 
-        // Hauptmenü als Start-Ansicht setzen
+        // Load initial view
         SceneManager.setView(new MainMenu().getView());
 
         primaryStage.setTitle("Bibliotheksverwaltung - Beispiel");

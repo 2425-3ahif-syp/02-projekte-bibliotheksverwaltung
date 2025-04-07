@@ -1,8 +1,8 @@
 package at.htl.bibliotheksverwaltung.view;
 
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
+import at.htl.bibliotheksverwaltung.database.DatabaseManager;
 import at.htl.bibliotheksverwaltung.model.Book;
-import at.htl.bibliotheksverwaltung.model.DataStore;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -51,8 +51,8 @@ public class BuchAusleihen {
 
     private void searchBooks() {
         String query = searchField.getText().trim().toLowerCase();
-
-        List<Book> available = DataStore.books.stream()
+        // Retrieve all books from the database and filter for available (not borrowed)
+        List<Book> available = DatabaseManager.getInstance().getAllBooks().stream()
                 .filter(b -> !b.isBorrowed())
                 .filter(b -> b.getTitle().toLowerCase().contains(query))
                 .collect(Collectors.toList());
@@ -89,9 +89,11 @@ public class BuchAusleihen {
     }
 
     private void borrowBook(Book book) {
+        // Mark book as borrowed and set due date to 14 days from now
         book.setBorrowed(true);
-        book.setDueDate(LocalDate.now().plusDays(14)
+        book.setDueDate(LocalDate.now().plusDays(14) // changeable after decision on how long you can borrow a book
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        DatabaseManager.getInstance().updateBook(book);
         searchBooks();
     }
 
@@ -130,7 +132,7 @@ public class BuchAusleihen {
         Region spacer2 = new Region();
         HBox.setHgrow(spacer2, Priority.ALWAYS);
 
-        topBar.getChildren().addAll(homeIcon,home , spacer1, title, spacer2, profile, userIcon);
+        topBar.getChildren().addAll(homeIcon, home, spacer1, title, spacer2, profile, userIcon);
         return topBar;
     }
 }
