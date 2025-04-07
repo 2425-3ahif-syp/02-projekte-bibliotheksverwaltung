@@ -32,7 +32,15 @@ public class BuchRueckgabe {
         HBox searchBox = new HBox(10);
         searchField = new TextField();
         searchField.setPromptText("Harry Potter...");
+        searchField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
         Button searchButton = new Button("Suchen");
+        searchButton.setStyle(
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; "
+        );
         searchButton.setOnAction(e -> searchBooks());
 
         searchBox.getChildren().addAll(searchField, searchButton);
@@ -70,18 +78,25 @@ public class BuchRueckgabe {
         HBox container = new HBox(10);
         container.setAlignment(Pos.CENTER_LEFT);
         container.setPadding(new Insets(10));
-        container.setStyle("-fx-border-color: #ccc; -fx-background-color: #fafafa;");
+        container.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background with blue border
 
         Label title = new Label(book.getTitle());
         title.setPrefWidth(300);
+        title.setStyle("-fx-font-size: 16px;");
 
         Label stars = new Label(getStarString(book.getRating()));
         stars.setStyle("-fx-text-fill: orange;");
 
         Label status = new Label("Ausgeliehen (bis " + book.getDueDate() + ")");
+        status.setStyle("-fx-font-size: 14px;");
 
         Button returnBtn = new Button("Rückgabe");
-        returnBtn.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+        returnBtn.setStyle(
+                "-fx-background-color: #4682B4; " + // Steel Blue background
+                        "-fx-text-fill: white; " +           // White text color
+                        "-fx-font-size: 14px; " +            // Font size
+                        "-fx-font-weight: bold; "            // Bold text
+        );
         returnBtn.setOnAction(e -> returnBook(book));
 
         container.getChildren().addAll(title, stars, status, returnBtn);
@@ -106,23 +121,23 @@ public class BuchRueckgabe {
     private HBox createTopBar(String titleText) {
         HBox topBar = new HBox(20);
         topBar.setPadding(new Insets(10));
-        topBar.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #ccc;");
+        topBar.setStyle("-fx-background-color: #4682B4; -fx-border-color: #ccc;");
 
         Label homeIcon = new Label("\u2302");
-        homeIcon.setStyle("-fx-font-size: 20;");
+        homeIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
         homeIcon.setOnMouseClicked(e -> SceneManager.setView(new MainMenu().getView()));
 
         Label home = new Label("Home");
-        home.setStyle("-fx-font-size: 18;");
+        home.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label title = new Label(titleText);
-        title.setStyle("-fx-font-size: 18;");
+        title.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label profile = new Label("Profil");
-        profile.setStyle("-fx-font-size: 18;");
+        profile.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label userIcon = new Label("\uD83D\uDC64");
-        userIcon.setStyle("-fx-font-size: 20;");
+        userIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
 
         Region spacer1 = new Region();
         HBox.setHgrow(spacer1, Priority.ALWAYS);

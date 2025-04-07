@@ -64,7 +64,7 @@ public class StatistikDetail {
         VBox card = new VBox(10);
         card.setPadding(new Insets(10));
         card.setPrefWidth(200);
-        card.setStyle("-fx-border-color: #ccc; -fx-background-color: #fafafa;");
+        card.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
 
         // Bild (Platzhalter oder echtes Bild)
         ImageView imageView = new ImageView();
@@ -79,7 +79,7 @@ public class StatistikDetail {
         }
 
         Label titleLabel = new Label(title);
-        titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
+        titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #4682B4;"); // Blue text
 
         Label descLabel = new Label(description);
         descLabel.setWrapText(true);
@@ -102,23 +102,23 @@ public class StatistikDetail {
     private HBox createTopBar(String titleText) {
         HBox topBar = new HBox(20);
         topBar.setPadding(new Insets(10));
-        topBar.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #ccc;");
+        topBar.setStyle("-fx-background-color: #4682B4; -fx-border-color: #ccc;"); // Blue background for top bar
 
         Label homeIcon = new Label("\u2302");
-        homeIcon.setStyle("-fx-font-size: 20;");
+        homeIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
         homeIcon.setOnMouseClicked(e -> SceneManager.setView(new MainMenu().getView()));
 
         Label home = new Label("Home");
-        home.setStyle("-fx-font-size: 18;");
+        home.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label title = new Label(titleText);
-        title.setStyle("-fx-font-size: 18;");
+        title.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label profile = new Label("Profil");
-        profile.setStyle("-fx-font-size: 18;");
+        profile.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label userIcon = new Label("\uD83D\uDC64");
-        userIcon.setStyle("-fx-font-size: 20;");
+        userIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
 
         Region spacer1 = new Region();
         HBox.setHgrow(spacer1, Priority.ALWAYS);
@@ -126,7 +126,7 @@ public class StatistikDetail {
         Region spacer2 = new Region();
         HBox.setHgrow(spacer2, Priority.ALWAYS);
 
-        topBar.getChildren().addAll(homeIcon,home , spacer1, title, spacer2, profile, userIcon);
+        topBar.getChildren().addAll(homeIcon, home, spacer1, title, spacer2, profile, userIcon);
         return topBar;
     }
 }

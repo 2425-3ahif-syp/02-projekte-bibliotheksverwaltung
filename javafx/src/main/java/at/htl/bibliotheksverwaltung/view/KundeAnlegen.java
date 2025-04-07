@@ -36,36 +36,56 @@ public class KundeAnlegen {
         // Formular
         firstNameField = new TextField();
         firstNameField.setPromptText("Vorname");
+        firstNameField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background and blue border
+
         lastNameField = new TextField();
         lastNameField.setPromptText("Nachname");
+        lastNameField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
 
         HBox nameBox = new HBox(10, firstNameField, lastNameField);
         nameBox.setAlignment(Pos.CENTER_LEFT);
 
         birthDayField = new TextField();
         birthDayField.setPromptText("Geburtstag");
+        birthDayField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
         birthMonthField = new TextField();
         birthMonthField.setPromptText("Geburtsmonat");
+        birthMonthField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
         birthYearField = new TextField();
         birthYearField.setPromptText("Geburtsjahr");
+        birthYearField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
 
         HBox birthBox = new HBox(10, birthDayField, birthMonthField, birthYearField);
         birthBox.setAlignment(Pos.CENTER_LEFT);
 
         streetField = new TextField();
         streetField.setPromptText("Straße");
+        streetField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
         plzField = new TextField();
         plzField.setPromptText("PLZ");
+        plzField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
         regionField = new TextField();
         regionField.setPromptText("Region");
+        regionField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
 
         HBox addressBox = new HBox(10, streetField, plzField, regionField);
         addressBox.setAlignment(Pos.CENTER_LEFT);
 
         Button addButton = new Button("Hinzufügen");
+        addButton.setStyle(
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; "
+        );
         addButton.setOnAction(e -> addCustomer());
 
         infoLabel = new Label();
+        infoLabel.setStyle("-fx-text-fill: #4682B4;"); // Blue text for info messages
 
         VBox formBox = new VBox(10, firstNameField, lastNameField, birthBox, addressBox, regionField, addButton, infoLabel);
         formBox.setAlignment(Pos.CENTER_LEFT);
@@ -125,27 +145,26 @@ public class KundeAnlegen {
         regionField.clear();
     }
 
-
     private HBox createTopBar(String titleText) {
         HBox topBar = new HBox(20);
         topBar.setPadding(new Insets(10));
-        topBar.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #ccc;");
+        topBar.setStyle("-fx-background-color: #4682B4; -fx-border-color: #ccc;");
 
         Label homeIcon = new Label("\u2302");
-        homeIcon.setStyle("-fx-font-size: 20;");
+        homeIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
         homeIcon.setOnMouseClicked(e -> SceneManager.setView(new MainMenu().getView()));
 
         Label home = new Label("Home");
-        home.setStyle("-fx-font-size: 18;");
+        home.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label title = new Label(titleText);
-        title.setStyle("-fx-font-size: 18;");
+        title.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label profile = new Label("Profil");
-        profile.setStyle("-fx-font-size: 18;");
+        profile.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label userIcon = new Label("\uD83D\uDC64");
-        userIcon.setStyle("-fx-font-size: 20;");
+        userIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
 
         Region spacer1 = new Region();
         HBox.setHgrow(spacer1, Priority.ALWAYS);
