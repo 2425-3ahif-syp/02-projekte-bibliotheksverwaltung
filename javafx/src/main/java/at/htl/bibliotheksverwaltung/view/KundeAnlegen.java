@@ -25,74 +25,77 @@ public class KundeAnlegen {
     private TextField regionField;
     private Label infoLabel;
 
+    private TextField createStyledTextField(String prompt) {
+        TextField tf = new TextField();
+        tf.setPromptText(prompt);
+        tf.setStyle("-fx-border-color: black; -fx-background-color: white;");
+        return tf;
+    }
+
     public VBox getView() {
         root = new VBox(20);
         root.setPadding(new Insets(20));
+        root.setAlignment(Pos.TOP_CENTER);
 
         // Top-Bar
         HBox topBar = createTopBar("Kunden anlegen");
         root.getChildren().add(topBar);
 
-        // Formular
-        firstNameField = new TextField();
-        firstNameField.setPromptText("Vorname");
-        firstNameField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background and blue border
+        // Profile picture placeholder
+        Label profileImage = new Label("\uD83D\uDC64");
+        profileImage.setStyle("-fx-font-size: 80; -fx-text-fill: black;");
+        VBox imageBox = new VBox(profileImage);
+        imageBox.setPrefSize(120, 120);
+        imageBox.setStyle("-fx-border-color: black; -fx-border-width: 1;");
+        imageBox.setAlignment(Pos.CENTER);
 
-        lastNameField = new TextField();
-        lastNameField.setPromptText("Nachname");
-        lastNameField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+        // Input fields
+        firstNameField = createStyledTextField("Vorname");
+        lastNameField = createStyledTextField("Nachname");
+        birthDayField = createStyledTextField("Tag");
+        birthMonthField = createStyledTextField("Monat");
+        birthYearField = createStyledTextField("Jahr");
+        streetField = createStyledTextField("Straße");
+        regionField = createStyledTextField("Ort");
+        plzField = createStyledTextField("Plz");
 
-        HBox nameBox = new HBox(10, firstNameField, lastNameField);
-        nameBox.setAlignment(Pos.CENTER_LEFT);
-
-        birthDayField = new TextField();
-        birthDayField.setPromptText("Geburtstag");
-        birthDayField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
-
-        birthMonthField = new TextField();
-        birthMonthField.setPromptText("Geburtsmonat");
-        birthMonthField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
-
-        birthYearField = new TextField();
-        birthYearField.setPromptText("Geburtsjahr");
-        birthYearField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
-
+        // Layouts
+        VBox nameBox = new VBox(10, firstNameField, lastNameField);
         HBox birthBox = new HBox(10, birthDayField, birthMonthField, birthYearField);
-        birthBox.setAlignment(Pos.CENTER_LEFT);
+        HBox addressBox = new HBox(10, streetField, regionField, plzField);
 
-        streetField = new TextField();
-        streetField.setPromptText("Straße");
-        streetField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+        VBox formFields = new VBox(15, nameBox, birthBox, addressBox);
+        formFields.setAlignment(Pos.CENTER_LEFT);
 
-        plzField = new TextField();
-        plzField.setPromptText("PLZ");
-        plzField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+        HBox formMain = new HBox(20, imageBox, formFields);
+        formMain.setAlignment(Pos.CENTER);
 
-        regionField = new TextField();
-        regionField.setPromptText("Region");
-        regionField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
-
-        HBox addressBox = new HBox(10, streetField, plzField, regionField);
-        addressBox.setAlignment(Pos.CENTER_LEFT);
-
-        Button addButton = new Button("Hinzufügen");
+        // Submit button
+        Button addButton = new Button("Erstellen");
+        addButton.setPrefWidth(300);
         addButton.setStyle(
-                "-fx-background-color: #4682B4; " +
+                "-fx-background-color: #007BFF; " +
                         "-fx-text-fill: white; " +
                         "-fx-font-size: 14px; " +
-                        "-fx-font-weight: bold; "
+                        "-fx-font-weight: bold;"
         );
         addButton.setOnAction(e -> addCustomer());
 
         infoLabel = new Label();
-        infoLabel.setStyle("-fx-text-fill: #4682B4;"); // Blue text for info messages
+        infoLabel.setStyle("-fx-text-fill: #4682B4;");
 
-        VBox formBox = new VBox(10, firstNameField, lastNameField, birthBox, addressBox, regionField, addButton, infoLabel);
-        formBox.setAlignment(Pos.CENTER_LEFT);
+        VBox formBox = new VBox(20, formMain, addButton, infoLabel);
+        formBox.setAlignment(Pos.CENTER);
 
-        root.getChildren().add(formBox);
+        // Form Container Box
+        VBox formContainer = new VBox(formBox);
+        formContainer.setAlignment(Pos.CENTER);
+        formContainer.setStyle("-fx-border-color: black; -fx-padding: 20;");
+
+        root.getChildren().add(formContainer);
         return root;
     }
+
 
     private void addCustomer() {
         String first = firstNameField.getText().trim();
