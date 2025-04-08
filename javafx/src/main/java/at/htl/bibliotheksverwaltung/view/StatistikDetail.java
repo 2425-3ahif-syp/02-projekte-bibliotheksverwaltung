@@ -3,6 +3,7 @@ package at.htl.bibliotheksverwaltung.view;
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -56,9 +57,26 @@ public class StatistikDetail {
         scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-        root.getChildren().add(scrollPane);
+
+        // "Back"-Button
+        Button backBtn = new Button("Zurück");
+        backBtn.setStyle(
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; "
+        );
+        backBtn.setOnAction(e -> SceneManager.setView(new Statistik().getView()));
+
+
+
+        root.getChildren().addAll(scrollPane,backBtn);
         return root;
     }
+
+
+
+
 
     private VBox createCard(String title, String imagePath, String description, int rating) {
         VBox card = new VBox(10);
