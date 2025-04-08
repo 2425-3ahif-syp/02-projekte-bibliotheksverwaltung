@@ -157,14 +157,8 @@ public class KundeAnlegen {
         homeIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
         homeIcon.setOnMouseClicked(e -> SceneManager.setView(new MainMenu().getView()));
 
-        Label home = new Label("Home");
-        home.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
-
         Label title = new Label(titleText);
         title.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
-
-        Label profile = new Label("Profil");
-        profile.setStyle("-fx-font-size: 18; -fx-text-fill: white;");
 
         Label userIcon = new Label("\uD83D\uDC64");
         userIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");
@@ -175,7 +169,7 @@ public class KundeAnlegen {
         Region spacer2 = new Region();
         HBox.setHgrow(spacer2, Priority.ALWAYS);
 
-        topBar.getChildren().addAll(homeIcon, home, spacer1, title, spacer2, profile, userIcon);
+        topBar.getChildren().addAll(homeIcon, spacer1, title, spacer2, userIcon);
         return topBar;
     }
 }
