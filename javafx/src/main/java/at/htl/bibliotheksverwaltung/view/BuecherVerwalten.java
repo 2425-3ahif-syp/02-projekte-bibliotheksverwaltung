@@ -102,11 +102,14 @@ public class BuecherVerwalten {
             status.setText("Ausgeliehen (bis " + book.getDueDate() + ")");
         }
 
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
         Button deleteBtn = new Button("Löschen");
-        deleteBtn.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;"); // Red background for delete
+        deleteBtn.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;");
         deleteBtn.setOnAction(e -> deleteBook(book));
 
-        container.getChildren().addAll(title, stars, status, deleteBtn);
+        container.getChildren().addAll(title, stars, status, spacer, deleteBtn);
         return container;
     }
 
