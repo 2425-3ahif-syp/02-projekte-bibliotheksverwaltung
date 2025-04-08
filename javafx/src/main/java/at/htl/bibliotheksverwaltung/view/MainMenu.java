@@ -11,9 +11,6 @@ public class MainMenu {
         VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);
 
-        // Set background color for the VBox
-        vbox.setStyle("-fx-background-color: #87CEEB;");  // Light Blue background
-
         // Creating the buttons
         Button rueckgabeBtn = new Button("Buch Rückgabe");
         Button statistikBtn = new Button("Statistik");
@@ -26,10 +23,10 @@ public class MainMenu {
         for (Button button : buttons) {
             button.setPrefWidth(200);
             button.setStyle(
-                    "-fx-background-color: #4682B4; " + // Steel Blue background
-                            "-fx-text-fill: white; " +           // White text color
-                            "-fx-font-size: 14px; " +            // Font size
-                            "-fx-font-weight: bold; "            // Bold text
+                    "-fx-background-color: #4682B4; " +
+                            "-fx-text-fill: white; " +
+                            "-fx-font-size: 14px; " +
+                            "-fx-font-weight: bold; "
             );
         }
 
