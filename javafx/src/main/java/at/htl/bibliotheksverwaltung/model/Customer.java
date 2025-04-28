@@ -34,4 +34,28 @@ public class Customer {
     public String getLastName() {
         return lastName;
     }
+
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public String getBirthMonth() {
+        return birthMonth;
+    }
+
+    public String getBirthYear() {
+        return birthYear;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getPlz() {
+        return plz;
+    }
+
+    public String getRegion() {
+        return region;
+    }
 }

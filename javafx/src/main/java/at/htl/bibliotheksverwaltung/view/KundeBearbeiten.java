@@ -12,7 +12,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-public class KundeAnlegen {
+public class KundeBearbeiten {
 
     private VBox root;
     private TextField firstNameField;
@@ -24,6 +24,11 @@ public class KundeAnlegen {
     private TextField plzField;
     private TextField regionField;
     private Label infoLabel;
+    private int customerId;
+
+    public KundeBearbeiten(int customerId) {
+        this.customerId = customerId;
+    }
 
     private TextField createStyledTextField(String prompt) {
         TextField tf = new TextField();
@@ -36,9 +41,8 @@ public class KundeAnlegen {
         root = new VBox(20);
         root.setPadding(new Insets(20));
         root.setAlignment(Pos.TOP_CENTER);
-
         // Top-Bar
-        HBox topBar = createTopBar("Kunden anlegen");
+        HBox topBar = createTopBar("Kunde bearbeiten");
         root.getChildren().add(topBar);
 
         // Profile picture placeholder
@@ -59,6 +63,8 @@ public class KundeAnlegen {
         regionField = createStyledTextField("Ort");
         plzField = createStyledTextField("Plz");
 
+        getCustomer();
+
         // Layouts
         VBox nameBox = new VBox(10, firstNameField, lastNameField);
         HBox birthBox = new HBox(10, birthDayField, birthMonthField, birthYearField);
@@ -71,30 +77,30 @@ public class KundeAnlegen {
         formMain.setAlignment(Pos.CENTER);
 
         // Submit button
-        Button addButton = new Button("Erstellen");
-        addButton.setPrefWidth(300);
-        addButton.setStyle(
+        Button changeButton = new Button("Ändern");
+        changeButton.setPrefWidth(300);
+        changeButton.setStyle(
                 "-fx-background-color: #007BFF; " +
                         "-fx-text-fill: white; " +
                         "-fx-font-size: 14px; " +
                         "-fx-font-weight: bold;"
         );
-        addButton.setOnAction(e -> addCustomer());
+        changeButton.setOnAction(e -> updateCustomer());
 
-        Button editButton = new Button("Kunde bearbeiten");
-        editButton.setPrefWidth(300);
-        editButton.setStyle(
-                "-fx-background-color: #007BFF; " +
+        Button backButton = new Button("Zurück");
+        backButton.setPrefWidth(300);
+        backButton.setStyle(
+                "-fx-background-color: #FF0000; " +
                         "-fx-text-fill: white; " +
                         "-fx-font-size: 14px; " +
                         "-fx-font-weight: bold;"
         );
-        editButton.setOnAction(e -> SceneManager.setView(new KundenIdUeberpruefen().getView()));
+        backButton.setOnAction(e -> SceneManager.setView(new KundeAnlegen().getView()));
 
         infoLabel = new Label();
         infoLabel.setStyle("-fx-text-fill: #4682B4;");
 
-        VBox formBox = new VBox(20, formMain, addButton, editButton, infoLabel);
+        VBox formBox = new VBox(20, formMain, changeButton, backButton, infoLabel);
         formBox.setAlignment(Pos.CENTER);
 
         // Form Container Box
@@ -106,8 +112,19 @@ public class KundeAnlegen {
         return root;
     }
 
+    private void getCustomer() {
+        var customer = DatabaseManager.getInstance().getCustomerById(customerId);
+        firstNameField.setText(customer.getFirstName());
+        lastNameField.setText(customer.getLastName());
+        birthDayField.setText(customer.getBirthDay());
+        birthMonthField.setText(customer.getBirthMonth());
+        birthYearField.setText(customer.getBirthYear());
+        streetField.setText(customer.getStreet());
+        plzField.setText(customer.getPlz());
+        regionField.setText(customer.getRegion());
+    }
 
-    private void addCustomer() {
+    private void updateCustomer() {
         String first = firstNameField.getText().trim();
         String last = lastNameField.getText().trim();
         String birthDay = birthDayField.getText().trim();
@@ -144,18 +161,8 @@ public class KundeAnlegen {
         }
 
         // All inputs valid — insert into DB
-        DatabaseManager.getInstance().addCustomer(first, last, birthDay, birthMonth, birthYear, street, plz, region);
-        infoLabel.setText("Kunde erfolgreich hinzugefügt!");
-
-        // Felder leeren
-        firstNameField.clear();
-        lastNameField.clear();
-        birthDayField.clear();
-        birthMonthField.clear();
-        birthYearField.clear();
-        streetField.clear();
-        plzField.clear();
-        regionField.clear();
+        DatabaseManager.getInstance().updateCustomer( customerId,first, last, Integer.parseInt(birthDay), Integer.parseInt(birthMonth), Integer.parseInt(birthYear), street, plz, region);
+        infoLabel.setText("Kunde erfolgreich geändert!");
     }
 
     private HBox createTopBar(String titleText) {

@@ -201,4 +201,86 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
+
+    public boolean customerExists(int id) {
+        String sql = "SELECT COUNT(*) FROM customer WHERE id = ?";
+        try (var stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (var rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Customer getCustomerById(int id) {
+        String sql = "SELECT * FROM customer WHERE id = ?";
+        try (var stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (var rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int customerId = rs.getInt("id");
+                    String firstName = rs.getString("first_name");
+                    String lastName = rs.getString("last_name");
+                    String birthDay = rs.getString("birth_day");
+                    String birthMonth = rs.getString("birth_month");
+                    String birthYear = rs.getString("birth_year");
+                    String street = rs.getString("street");
+                    String plz = rs.getString("plz");
+                    String region = rs.getString("region");
+                    return new Customer(customerId, firstName, lastName, birthDay, birthMonth, birthYear, street, plz, region);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void printAllCustomerIDs() {
+        String sql = "SELECT id FROM customer";
+        try (var stmt = connection.prepareStatement(sql);
+             var rs = stmt.executeQuery()) {
+
+            System.out.println("Customer IDs:");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                System.out.println(id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean updateCustomer(int id, String firstName, String lastName, int birthDay, int birthMonth, int birthYear,
+                                  String street, String plz, String region) {
+        String sql = "UPDATE customer SET first_name = ?, last_name = ?, birth_day = ?, birth_month = ?, birth_year = ?, " +
+                "street = ?, plz = ?, region = ? WHERE id = ?";
+
+        try (var stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, firstName);
+            stmt.setString(2, lastName);
+            stmt.setInt(3, birthDay);
+            stmt.setInt(4, birthMonth);
+            stmt.setInt(5, birthYear);
+            stmt.setString(6, street);
+            stmt.setString(7, plz);
+            stmt.setString(8, region);
+            stmt.setInt(9, id);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
