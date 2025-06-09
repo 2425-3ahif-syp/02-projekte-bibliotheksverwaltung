@@ -28,11 +28,11 @@ public class BuecherVerwalten {
         HBox topBar = createTopBar("Verwaltung");
         root.getChildren().add(topBar);
 
-        // Suchleiste + Filter
         HBox searchBox = new HBox(10);
         searchField = new TextField();
         searchField.setPromptText("Eingabe...");
         searchField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+        searchField.setOnAction(e -> searchBooks());
 
         Button searchButton = new Button("Suchen");
         searchButton.setStyle(
@@ -43,7 +43,6 @@ public class BuecherVerwalten {
         );
         searchButton.setOnAction(e -> searchBooks());
 
-        // Status-Filter
         statusFilter = new ComboBox<>();
         statusFilter.getItems().addAll("Alle", "Verfügbar", "Ausgeborgt");
         statusFilter.setValue("Alle");
@@ -52,7 +51,6 @@ public class BuecherVerwalten {
             searchBooks();
         });
 
-        // Kunden-Filter (nur sichtbar bei "Ausgeborgt")
         customerFilter = new ComboBox<>();
         customerFilter.setPromptText("Kunde wählen");
         customerFilter.setVisible(false);
@@ -60,7 +58,6 @@ public class BuecherVerwalten {
         updateCustomerList();
         customerFilter.setOnAction(e -> searchBooks());
 
-        // "Buch Hinzufügen"
         Button addBookButton = new Button("Buch Hinzufügen");
         addBookButton.setStyle(
                 "-fx-background-color: #4682B4; " +
@@ -72,14 +69,12 @@ public class BuecherVerwalten {
 
         searchBox.getChildren().addAll(searchField, searchButton, statusFilter, customerFilter, addBookButton);
 
-        // Ergebnisliste (mit ScrollPane)
         resultList = new VBox(10);
         ScrollPane scrollPane = new ScrollPane(resultList);
         scrollPane.setFitToWidth(true);
 
         root.getChildren().addAll(searchBox, scrollPane);
 
-        // Initial alle Bücher
         searchBooks();
 
         return root;
@@ -154,9 +149,24 @@ public class BuecherVerwalten {
 
         Button deleteBtn = new Button("Löschen");
         deleteBtn.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;");
-        deleteBtn.setOnAction(e -> deleteBook(book));
 
-        container.getChildren().addAll(title, stars, status, spacer, deleteBtn);
+        if (book.isBorrowed()) {
+            deleteBtn.setDisable(true);
+
+            Label overlay = new Label();
+            overlay.setMinSize(deleteBtn.getWidth(), deleteBtn.getHeight());
+            overlay.setPrefSize(60, 30); // Größe ggf. anpassen
+            overlay.setStyle("-fx-background-color: transparent;");
+            Tooltip tooltip = new Tooltip("Ausgeborgte Bücher können nicht gelöscht werden");
+            Tooltip.install(overlay, tooltip);
+
+            StackPane stack = new StackPane(deleteBtn, overlay);
+            container.getChildren().addAll(title, stars, status, spacer, stack);
+        } else {
+            deleteBtn.setOnAction(e -> deleteBook(book));
+            container.getChildren().addAll(title, stars, status, spacer, deleteBtn);
+        }
+
         return container;
     }
 

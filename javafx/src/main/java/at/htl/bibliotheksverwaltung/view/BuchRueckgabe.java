@@ -33,6 +33,7 @@ public class BuchRueckgabe {
         searchField = new TextField();
         searchField.setPromptText("Harry Potter...");
         searchField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+        searchField.setOnAction(e -> searchBooks());
 
         Button searchButton = new Button("Suchen");
         searchButton.setStyle(
