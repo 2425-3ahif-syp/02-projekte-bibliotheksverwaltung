@@ -142,9 +142,10 @@ public class BuecherVerwalten {
 
         Label status = new Label();
         if (book.isBorrowed()) {
-            status.setText("Ausgeliehen (bis " + book.getDueDate() + ")");
+            Customer customer = DatabaseManager.getInstance().getCustomerById(book.getCustomerId());
+            String customerName = customer != null ? customer.getFirstName() + " " + customer.getLastName() + " [" + customer.getId() + "]" : "Unbekannt";
+            status.setText("Ausgeliehen (bis " + book.getDueDate() + ") von (" + customerName + ")");
         }
-
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
