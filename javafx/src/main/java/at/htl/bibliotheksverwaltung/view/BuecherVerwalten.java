@@ -120,7 +120,7 @@ public class BuecherVerwalten {
 
     private void addNewBook() {
         DatabaseManager.getInstance().addBook("Neues Buch " + System.currentTimeMillis(), 3);
-        searchBooks();
+        //createBookItem();
     }
 
     private String getStarString(int rating) {

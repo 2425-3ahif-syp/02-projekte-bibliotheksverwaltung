@@ -58,4 +58,9 @@ public class Customer {
     public String getRegion() {
         return region;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " (ID: " + id + ")";
+    }
 }

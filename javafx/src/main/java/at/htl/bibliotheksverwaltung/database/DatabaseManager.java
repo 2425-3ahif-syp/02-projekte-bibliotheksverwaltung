@@ -44,15 +44,19 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Legt die Tabellen an (inklusive customer_id in book) und befüllt sie mit Dummy-Daten.
+     */
     public void initializeDatabase() throws SQLException {
-        var createTableStatements = new String[]{
+        String[] createTableStatements = new String[] {
                 """
             CREATE TABLE IF NOT EXISTS book (
                 id IDENTITY PRIMARY KEY,
                 title VARCHAR(255),
                 rating INT,
                 borrowed BOOLEAN,
-                due_date VARCHAR(20)
+                due_date VARCHAR(20),
+                customer_id BIGINT
             )
             """,
                 """
@@ -70,9 +74,9 @@ public class DatabaseManager {
             """
         };
 
-        try (var statement = connection.createStatement()) {
-            for (var sql : createTableStatements) {
-                statement.execute(sql);
+        try (Statement stmt = connection.createStatement()) {
+            for (String sql : createTableStatements) {
+                stmt.execute(sql);
             }
         }
 
@@ -80,26 +84,29 @@ public class DatabaseManager {
     }
 
     public void insertDummyData() {
-        try (var statement = connection.createStatement()) {
-            statement.execute("DELETE FROM book");
-            statement.execute("DELETE FROM customer");
+        try (Statement stmt = connection.createStatement()) {
+            // Alte Daten löschen
+            stmt.execute("TRUNCATE TABLE book RESTART IDENTITY");
+            stmt.execute("TRUNCATE TABLE customer RESTART IDENTITY");
 
-            statement.execute("""
-                INSERT INTO book (title, rating, borrowed, due_date) VALUES
-                ('Harry Potter und der Stein der Weisen', 5, TRUE, '25.03.2025'),
-                ('Harry Potter und die Kammer des Schreckens', 4, FALSE, ''),
-                ('Harry Potter und der Gefangene von Askaban', 5, FALSE, ''),
-                ('Don Quijote', 5, FALSE, ''),
-                ('Herr der Ringe 1', 4, TRUE, '01.04.2025'),
-                ('Harry Potter und die Heiligtümer des Todes', 3, FALSE, ''),
-                ('Der Verdacht', 2, FALSE, ''),
-                ('Don Carlos', 1, FALSE, '')
-            """);
-
-            statement.execute("""
+            // Dummy-Kunden
+            stmt.execute("""
                 INSERT INTO customer (first_name, last_name, birth_day, birth_month, birth_year, street, plz, region) VALUES
                 ('Max', 'Mustermann', '01', '01', '2000', 'Musterstraße 1', '4020', 'Linz'),
-                ('Anna', 'Musterfrau', '12', '02', '2001', 'Beispielweg 2', '4030', 'Linz')
+                ('Anna', 'Musterfrau',  '12', '02', '2001', 'Beispielweg 2', '4030', 'Linz')
+            """);
+
+            // Dummy-Bücher
+            stmt.execute("""
+                INSERT INTO book (title, rating, borrowed, due_date, customer_id) VALUES
+                  ('Harry Potter und der Stein der Weisen',    5, TRUE,  '25.03.2025', 1),
+                  ('Harry Potter und die Kammer des Schreckens',4, FALSE, '',          NULL),
+                  ('Harry Potter und der Gefangene von Askaban',5, FALSE, '',          NULL),
+                  ('Don Quijote',                              5, FALSE, '',          NULL),
+                  ('Herr der Ringe 1',                         4, TRUE,  '01.04.2025', 2),
+                  ('Harry Potter und die Heiligtümer des Todes',3, FALSE, '',          NULL),
+                  ('Der Verdacht',                             2, FALSE, '',          NULL),
+                  ('Don Carlos',                               1, FALSE, '',          NULL)
             """);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,18 +114,30 @@ public class DatabaseManager {
     }
 
     // CRUD: Books
-
     public List<Book> getAllBooks() {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT * FROM book";
-        try (var stmt = connection.createStatement();
-             var rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
             while (rs.next()) {
+                int    id          = rs.getInt("id");
+                String  title       = rs.getString("title");
+                int     rating      = rs.getInt("rating");
+                boolean borrowed    = rs.getBoolean("borrowed");
+                String  dueDate     = rs.getString("due_date");
+                int     cid        = rs.getInt("customer_id");
+                if (rs.wasNull()) {
+                    cid = 0;
+                }
+
                 books.add(new Book(
-                        rs.getString("title"),
-                        rs.getInt("rating"),
-                        rs.getBoolean("borrowed"),
-                        rs.getString("due_date")
+                        title,
+                        rating,
+                        borrowed,
+                        dueDate,
+                        id,
+                        cid
                 ));
             }
         } catch (SQLException e) {
@@ -128,8 +147,8 @@ public class DatabaseManager {
     }
 
     public void addBook(String title, int rating) {
-        String sql = "INSERT INTO book (title, rating, borrowed, due_date) VALUES (?, ?, false, '')";
-        try (var stmt = connection.prepareStatement(sql)) {
+        String sql = "INSERT INTO book (title, rating, borrowed, due_date, customer_id) VALUES (?, ?, false, '', NULL)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, title);
             stmt.setInt(2, rating);
             stmt.executeUpdate();
@@ -139,11 +158,22 @@ public class DatabaseManager {
     }
 
     public void updateBook(Book book) {
-        String sql = "UPDATE book SET borrowed = ?, due_date = ? WHERE title = ?";
-        try (var stmt = connection.prepareStatement(sql)) {
+        String sql = """
+            UPDATE book
+               SET borrowed    = ?,
+                   due_date    = ?,
+                   customer_id = ?
+             WHERE id = ?
+            """;
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setBoolean(1, book.isBorrowed());
             stmt.setString(2, book.getDueDate());
-            stmt.setString(3, book.getTitle());
+            if (book.getCustomerId() != 0) {
+                stmt.setInt(3, book.getCustomerId());
+            } else {
+                stmt.setNull(3, Types.BIGINT);
+            }
+            stmt.setInt(4, book.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,20 +181,22 @@ public class DatabaseManager {
     }
 
     public void deleteBook(Book book) {
-        String sql = "DELETE FROM book WHERE title = ?";
-        try (var stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, book.getTitle());
+        String sql = "DELETE FROM book WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, book.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    // CRUD: Customers
     public List<Customer> getAllCustomers() {
         List<Customer> customers = new ArrayList<>();
         String sql = "SELECT * FROM customer";
-        try (var stmt = connection.createStatement();
-             var rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
             while (rs.next()) {
                 customers.add(new Customer(
                         rs.getInt("id"),
@@ -184,64 +216,6 @@ public class DatabaseManager {
         return customers;
     }
 
-    public void addCustomer(String first, String last, String day, String month, String year,
-                            String street, String plz, String region) {
-        String sql = "INSERT INTO customer (first_name, last_name, birth_day, birth_month, birth_year, street, plz, region) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (var stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, first);
-            stmt.setString(2, last);
-            stmt.setString(3, day);
-            stmt.setString(4, month);
-            stmt.setString(5, year);
-            stmt.setString(6, street);
-            stmt.setString(7, plz);
-            stmt.setString(8, region);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean customerExists(int id) {
-        String sql = "SELECT COUNT(*) FROM customer WHERE id = ?";
-        try (var stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            try (var rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    int count = rs.getInt(1);
-                    return count > 0;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public Customer getCustomerById(int id) {
-        String sql = "SELECT * FROM customer WHERE id = ?";
-        try (var stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            try (var rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    int customerId = rs.getInt("id");
-                    String firstName = rs.getString("first_name");
-                    String lastName = rs.getString("last_name");
-                    String birthDay = rs.getString("birth_day");
-                    String birthMonth = rs.getString("birth_month");
-                    String birthYear = rs.getString("birth_year");
-                    String street = rs.getString("street");
-                    String plz = rs.getString("plz");
-                    String region = rs.getString("region");
-                    return new Customer(customerId, firstName, lastName, birthDay, birthMonth, birthYear, street, plz, region);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public void printAllCustomerIDs() {
         String sql = "SELECT id FROM customer";
         try (var stmt = connection.prepareStatement(sql);
@@ -258,12 +232,81 @@ public class DatabaseManager {
         }
     }
 
-    public boolean updateCustomer(int id, String firstName, String lastName, int birthDay, int birthMonth, int birthYear,
-                                  String street, String plz, String region) {
-        String sql = "UPDATE customer SET first_name = ?, last_name = ?, birth_day = ?, birth_month = ?, birth_year = ?, " +
-                "street = ?, plz = ?, region = ? WHERE id = ?";
+    public void addCustomer(String first, String last, String day, String month, String year,
+                            String street, String plz, String region) {
+        String sql = """
+            INSERT INTO customer (
+                first_name, last_name,
+                birth_day, birth_month, birth_year,
+                street, plz, region
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """;
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, first);
+            stmt.setString(2, last);
+            stmt.setString(3, day);
+            stmt.setString(4, month);
+            stmt.setString(5, year);
+            stmt.setString(6, street);
+            stmt.setString(7, plz);
+            stmt.setString(8, region);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-        try (var stmt = connection.prepareStatement(sql)) {
+    public boolean customerExists(int id) {
+        String sql = "SELECT COUNT(*) FROM customer WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Customer getCustomerById(int id) {
+        String sql = "SELECT * FROM customer WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Customer(
+                            rs.getInt("id"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getString("birth_day"),
+                            rs.getString("birth_month"),
+                            rs.getString("birth_year"),
+                            rs.getString("street"),
+                            rs.getString("plz"),
+                            rs.getString("region")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateCustomer(int id, String firstName, String lastName,
+                                  int birthDay, int birthMonth, int birthYear,
+                                  String street, String plz, String region) {
+        String sql = """
+            UPDATE customer SET
+                first_name = ?, last_name = ?,
+                birth_day  = ?, birth_month = ?, birth_year = ?,
+                street     = ?, plz = ?, region = ?
+             WHERE id = ?
+            """;
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, firstName);
             stmt.setString(2, lastName);
             stmt.setInt(3, birthDay);
@@ -273,14 +316,10 @@ public class DatabaseManager {
             stmt.setString(7, plz);
             stmt.setString(8, region);
             stmt.setInt(9, id);
-
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
+            return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-
-
 }

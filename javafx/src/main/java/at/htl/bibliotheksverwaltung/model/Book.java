@@ -5,12 +5,16 @@ public class Book {
     private int rating;         // z.B. 1-5 Sterne
     private boolean borrowed;
     private String dueDate;     // z.B. "25.03.2025"
+    private int id;
+    private int customerId;
 
-    public Book(String title, int rating, boolean borrowed, String dueDate) {
+    public Book(String title, int rating, boolean borrowed, String dueDate, int id, int customerId) {
         this.title = title;
         this.rating = rating;
         this.borrowed = borrowed;
         this.dueDate = dueDate;
+        this.id = id;
+        this.customerId = customerId;
     }
 
     public String getTitle() {
@@ -35,5 +39,15 @@ public class Book {
 
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getCustomerId() {return customerId;}
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }
