@@ -3,6 +3,7 @@ package at.htl.bibliotheksverwaltung.view;
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
 import at.htl.bibliotheksverwaltung.database.DatabaseManager;
 import at.htl.bibliotheksverwaltung.model.Book;
+import at.htl.bibliotheksverwaltung.model.Customer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -16,6 +17,8 @@ public class BuecherVerwalten {
     private VBox root;
     private TextField searchField;
     private VBox resultList;
+    private ComboBox<String> statusFilter;
+    private ComboBox<Customer> customerFilter;
 
     public VBox getView() {
         root = new VBox(20);
@@ -25,32 +28,49 @@ public class BuecherVerwalten {
         HBox topBar = createTopBar("Verwaltung");
         root.getChildren().add(topBar);
 
-        // Suchleiste
+        // Suchleiste + Filter
         HBox searchBox = new HBox(10);
         searchField = new TextField();
         searchField.setPromptText("Eingabe...");
-        searchField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background and blue border
+        searchField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
 
         Button searchButton = new Button("Suchen");
         searchButton.setStyle(
-                "-fx-background-color: #4682B4; " + // Steel Blue background
-                        "-fx-text-fill: white; " +           // White text color
-                        "-fx-font-size: 14px; " +            // Font size
-                        "-fx-font-weight: bold; "            // Bold text
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; "
         );
         searchButton.setOnAction(e -> searchBooks());
+
+        // Status-Filter
+        statusFilter = new ComboBox<>();
+        statusFilter.getItems().addAll("Alle", "Verfügbar", "Ausgeborgt");
+        statusFilter.setValue("Alle");
+        statusFilter.setOnAction(e -> {
+            updateCustomerFilterVisibility();
+            searchBooks();
+        });
+
+        // Kunden-Filter (nur sichtbar bei "Ausgeborgt")
+        customerFilter = new ComboBox<>();
+        customerFilter.setPromptText("Kunde wählen");
+        customerFilter.setVisible(false);
+        customerFilter.setMinWidth(150);
+        updateCustomerList();
+        customerFilter.setOnAction(e -> searchBooks());
 
         // "Buch Hinzufügen"
         Button addBookButton = new Button("Buch Hinzufügen");
         addBookButton.setStyle(
-                "-fx-background-color: #4682B4; " + // Steel Blue background
-                        "-fx-text-fill: white; " +           // White text color
-                        "-fx-font-size: 14px; " +            // Font size
-                        "-fx-font-weight: bold; "            // Bold text
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; "
         );
         addBookButton.setOnAction(e -> addNewBook());
 
-        searchBox.getChildren().addAll(searchField, searchButton, addBookButton);
+        searchBox.getChildren().addAll(searchField, searchButton, statusFilter, customerFilter, addBookButton);
 
         // Ergebnisliste (mit ScrollPane)
         resultList = new VBox(10);
@@ -65,11 +85,38 @@ public class BuecherVerwalten {
         return root;
     }
 
+    private void updateCustomerList() {
+        customerFilter.getItems().clear();
+        customerFilter.getItems().add(null); // Für "alle Kunden"
+        customerFilter.getItems().addAll(DatabaseManager.getInstance().getAllCustomers());
+    }
+
+    private void updateCustomerFilterVisibility() {
+        boolean show = "Ausgeborgt".equals(statusFilter.getValue());
+        customerFilter.setVisible(show);
+        if (!show) {
+            customerFilter.setValue(null);
+        }
+    }
+
     private void searchBooks() {
         String query = searchField.getText().trim().toLowerCase();
-        // Retrieve all books from the database and filter by title
+        String status = statusFilter.getValue();
+        Customer selectedCustomer = customerFilter.getValue();
+
         List<Book> found = DatabaseManager.getInstance().getAllBooks().stream()
                 .filter(b -> b.getTitle().toLowerCase().contains(query))
+                .filter(b -> {
+                    if ("Verfügbar".equals(status)) return !b.isBorrowed();
+                    if ("Ausgeborgt".equals(status)) return b.isBorrowed();
+                    return true;
+                })
+                .filter(b -> {
+                    if ("Ausgeborgt".equals(status) && selectedCustomer != null) {
+                        return b.getCustomerId() == selectedCustomer.getId();
+                    }
+                    return true;
+                })
                 .collect(Collectors.toList());
 
         updateResultList(found);
@@ -88,7 +135,7 @@ public class BuecherVerwalten {
         HBox container = new HBox(10);
         container.setAlignment(Pos.CENTER_LEFT);
         container.setPadding(new Insets(10));
-        container.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background with blue border
+        container.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
 
         Label title = new Label(book.getTitle());
         title.setPrefWidth(250);
@@ -115,12 +162,12 @@ public class BuecherVerwalten {
 
     private void deleteBook(Book book) {
         DatabaseManager.getInstance().deleteBook(book);
-        searchBooks(); // Liste aktualisieren
+        searchBooks();
     }
 
     private void addNewBook() {
         DatabaseManager.getInstance().addBook("Neues Buch " + System.currentTimeMillis(), 3);
-        //createBookItem();
+        searchBooks();
     }
 
     private String getStarString(int rating) {
