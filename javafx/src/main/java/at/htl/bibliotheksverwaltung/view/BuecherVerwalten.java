@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.util.Pair;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -176,8 +177,68 @@ public class BuecherVerwalten {
     }
 
     private void addNewBook() {
-        DatabaseManager.getInstance().addBook("Neues Buch " + System.currentTimeMillis(), 3);
-        searchBooks();
+        Dialog<Pair<String, Integer>> dialog = new Dialog<>();
+        dialog.setTitle("Neues Buch hinzufügen");
+        dialog.setHeaderText("Bitte gib den Buchtitel und das Rating ein:");;
+        ButtonType addButtonType = new ButtonType("Hinzufügen", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        Label titleLabel = new Label("Titel:");
+        titleLabel.setStyle("-fx-text-fill: #4682B4; -fx-font-size: 14px; -fx-font-weight: bold;");
+        TextField titleField = new TextField();
+        titleField.setPromptText("Titel");
+        titleField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
+        Label ratingLabel = new Label("Rating (1-5):");
+        ratingLabel.setStyle("-fx-text-fill: #4682B4; -fx-font-size: 14px; -fx-font-weight: bold;");
+        Spinner<Integer> ratingSpinner = new Spinner<>(1, 5, 3);
+        ratingSpinner.setEditable(true);
+        ratingSpinner.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
+        grid.add(titleLabel, 0, 0);
+        grid.add(titleField, 1, 0);
+        grid.add(ratingLabel, 0, 1);
+        grid.add(ratingSpinner, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.getDialogPane().setStyle("-fx-background-color: #f0f8ff;");
+
+        Button addBtn = (Button) dialog.getDialogPane().lookupButton(addButtonType);
+        addBtn.setStyle(
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold;"
+        );
+        Button cancelBtn = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+        cancelBtn.setStyle(
+                "-fx-background-color: #cccccc; " +
+                        "-fx-text-fill: #4682B4; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold;"
+        );
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                return new Pair<>(titleField.getText(), ratingSpinner.getValue());
+            }
+            return null;
+        });
+
+        dialog.showAndWait().ifPresent(result -> {
+            String title = result.getKey();
+            int rating = result.getValue();
+            if (title != null && !title.trim().isEmpty()) {
+                DatabaseManager.getInstance().addBook(title.trim(), rating);
+                searchBooks();
+            }
+        });
     }
 
     private String getStarString(int rating) {
