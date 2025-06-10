@@ -1,14 +1,19 @@
 package at.htl.bibliotheksverwaltung.view;
 
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
+import at.htl.bibliotheksverwaltung.database.DatabaseManager;
+import at.htl.bibliotheksverwaltung.model.Book;
+import at.htl.bibliotheksverwaltung.model.Customer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StatistikDetail {
 
@@ -22,41 +27,67 @@ public class StatistikDetail {
         HBox topBar = createTopBar("Statistik");
         root.getChildren().add(topBar);
 
-        // ScrollPane mit horizontalem HBox, um 3 "Karten" anzuzeigen
-        HBox cardContainer = new HBox(20);
+        VBox cardContainer = new VBox(20);
         cardContainer.setPadding(new Insets(10));
         cardContainer.setAlignment(Pos.CENTER_LEFT);
 
-        // Karte 1
-        VBox card1 = createCard(
-                "Don Quijote",
-                "file:./donquijote.jpg", // Beispiel: eigenes Bild, hier nur Platzhalter
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...",
-                5
-        );
+        List<Book> books = DatabaseManager.getInstance().getAllBooks();
+        int counter = 0;
+        HBox hbox = null;
+        for (int i = 5; i >= 1; i--) {
+            for (int j = 0; j < books.size(); j++) {
+                if (books.get(j).getRating() == i) {
+                    String description = "Verfügbar";
+                    if (books.get(j).isBorrowed()) {
+                        description = "Ausgeliehen (bis " + books.get(j).getDueDate() + ")";
+                    }
+                    VBox card = createCard(
+                            books.get(j).getTitle(),
+                            description,
+                            books.get(j).getRating()
+                    );
+                    switch (i) {
+                        case 1:
+                            card.setStyle("-fx-border-color: red; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
 
-        // Karte 2
-        VBox card2 = createCard(
-                "Herr der Ringe",
-                "file:./herrderringe.jpg",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...",
-                4
-        );
+                            break;
+                        case 2:
+                            card.setStyle("-fx-border-color: orange; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
 
-        // Karte 3
-        VBox card3 = createCard(
-                "Harry Potter",
-                "file:./harrypotter.jpg",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...",
-                5
-        );
+                            break;
+                        case 3:
+                            card.setStyle("-fx-border-color: yellow; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
 
-        cardContainer.getChildren().addAll(card1, card2, card3);
+                            break;
+                        case 4:
+                            card.setStyle("-fx-border-color: lightgreen; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
+
+                            break;
+                        case 5:
+                            card.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+                            break;
+                        default:
+                            break;
+                    }
+                    counter++;
+                    if (counter == 1) {
+                        hbox = new HBox(20);
+                    }
+                    hbox.getChildren().add(card);
+                    if (counter == 3) {
+                        cardContainer.getChildren().add(hbox);
+                        counter = 0;
+                    }
+                }
+            }
+        }
+        if (counter > 0) {
+            cardContainer.getChildren().add(hbox);
+        }
 
         ScrollPane scrollPane = new ScrollPane(cardContainer);
         scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-
 
         // "Back"-Button
         Button backBtn = new Button("Zurück");
@@ -69,35 +100,18 @@ public class StatistikDetail {
         backBtn.setOnAction(e -> SceneManager.setView(new Statistik().getView()));
 
 
-
-        root.getChildren().addAll(scrollPane,backBtn);
+        root.getChildren().addAll(scrollPane, backBtn);
         return root;
     }
 
 
-
-
-
-    private VBox createCard(String title, String imagePath, String description, int rating) {
+    private VBox createCard(String title, String description, int rating) {
         VBox card = new VBox(10);
         card.setPadding(new Insets(10));
-        card.setPrefWidth(200);
-        card.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
-
-        // Bild (Platzhalter oder echtes Bild)
-        ImageView imageView = new ImageView();
-        try {
-            Image img = new Image(imagePath, 200, 120, true, true);
-            imageView.setImage(img);
-        } catch (Exception e) {
-            // Falls Bild nicht geladen werden kann, ignorieren wir das
-            imageView.setFitWidth(200);
-            imageView.setFitHeight(120);
-            imageView.setStyle("-fx-background-color: #ddd; -fx-border-color: #999;");
-        }
+        card.setPrefWidth(250);
 
         Label titleLabel = new Label(title);
-        titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #4682B4;"); // Blue text
+        titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #4682B4;");
 
         Label descLabel = new Label(description);
         descLabel.setWrapText(true);
@@ -105,7 +119,7 @@ public class StatistikDetail {
         Label starLabel = new Label(getStarString(rating));
         starLabel.setStyle("-fx-text-fill: orange; -fx-font-size: 16;");
 
-        card.getChildren().addAll(imageView, titleLabel, descLabel, starLabel);
+        card.getChildren().addAll(titleLabel, descLabel, starLabel);
         return card;
     }
 

@@ -3,10 +3,12 @@ package at.htl.bibliotheksverwaltung.view;
 import at.htl.bibliotheksverwaltung.controller.SceneManager;
 import at.htl.bibliotheksverwaltung.database.DatabaseManager;
 import at.htl.bibliotheksverwaltung.model.Book;
+import at.htl.bibliotheksverwaltung.model.Customer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.util.Pair;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +18,8 @@ public class BuecherVerwalten {
     private VBox root;
     private TextField searchField;
     private VBox resultList;
+    private ComboBox<String> statusFilter;
+    private ComboBox<Customer> customerFilter;
 
     public VBox getView() {
         root = new VBox(20);
@@ -25,51 +29,90 @@ public class BuecherVerwalten {
         HBox topBar = createTopBar("Verwaltung");
         root.getChildren().add(topBar);
 
-        // Suchleiste
         HBox searchBox = new HBox(10);
         searchField = new TextField();
         searchField.setPromptText("Eingabe...");
-        searchField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background and blue border
+        searchField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+        searchField.setOnAction(e -> searchBooks());
 
         Button searchButton = new Button("Suchen");
         searchButton.setStyle(
-                "-fx-background-color: #4682B4; " + // Steel Blue background
-                        "-fx-text-fill: white; " +           // White text color
-                        "-fx-font-size: 14px; " +            // Font size
-                        "-fx-font-weight: bold; "            // Bold text
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; "
         );
         searchButton.setOnAction(e -> searchBooks());
 
-        // "Buch Hinzufügen"
+        statusFilter = new ComboBox<>();
+        statusFilter.getItems().addAll("Alle", "Verfügbar", "Ausgeborgt");
+        statusFilter.setValue("Alle");
+        statusFilter.setOnAction(e -> {
+            updateCustomerFilterVisibility();
+            searchBooks();
+        });
+
+        customerFilter = new ComboBox<>();
+        customerFilter.setPromptText("Kunde wählen");
+        customerFilter.setVisible(false);
+        customerFilter.setMinWidth(150);
+        updateCustomerList();
+        customerFilter.setOnAction(e -> searchBooks());
+
         Button addBookButton = new Button("Buch Hinzufügen");
         addBookButton.setStyle(
-                "-fx-background-color: #4682B4; " + // Steel Blue background
-                        "-fx-text-fill: white; " +           // White text color
-                        "-fx-font-size: 14px; " +            // Font size
-                        "-fx-font-weight: bold; "            // Bold text
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; "
         );
         addBookButton.setOnAction(e -> addNewBook());
 
-        searchBox.getChildren().addAll(searchField, searchButton, addBookButton);
+        searchBox.getChildren().addAll(searchField, searchButton, statusFilter, customerFilter, addBookButton);
 
-        // Ergebnisliste (mit ScrollPane)
         resultList = new VBox(10);
         ScrollPane scrollPane = new ScrollPane(resultList);
         scrollPane.setFitToWidth(true);
 
         root.getChildren().addAll(searchBox, scrollPane);
 
-        // Initial alle Bücher
         searchBooks();
 
         return root;
     }
 
+    private void updateCustomerList() {
+        customerFilter.getItems().clear();
+        customerFilter.getItems().add(null); // Für "alle Kunden"
+        customerFilter.getItems().addAll(DatabaseManager.getInstance().getAllCustomers());
+    }
+
+    private void updateCustomerFilterVisibility() {
+        boolean show = "Ausgeborgt".equals(statusFilter.getValue());
+        customerFilter.setVisible(show);
+        if (!show) {
+            customerFilter.setValue(null);
+        }
+    }
+
     private void searchBooks() {
         String query = searchField.getText().trim().toLowerCase();
-        // Retrieve all books from the database and filter by title
+        String status = statusFilter.getValue();
+        Customer selectedCustomer = customerFilter.getValue();
+
         List<Book> found = DatabaseManager.getInstance().getAllBooks().stream()
                 .filter(b -> b.getTitle().toLowerCase().contains(query))
+                .filter(b -> {
+                    if ("Verfügbar".equals(status)) return !b.isBorrowed();
+                    if ("Ausgeborgt".equals(status)) return b.isBorrowed();
+                    return true;
+                })
+                .filter(b -> {
+                    if ("Ausgeborgt".equals(status) && selectedCustomer != null) {
+                        return b.getCustomerId() == selectedCustomer.getId();
+                    }
+                    return true;
+                })
                 .collect(Collectors.toList());
 
         updateResultList(found);
@@ -88,7 +131,7 @@ public class BuecherVerwalten {
         HBox container = new HBox(10);
         container.setAlignment(Pos.CENTER_LEFT);
         container.setPadding(new Insets(10));
-        container.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");  // Light blue background with blue border
+        container.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
 
         Label title = new Label(book.getTitle());
         title.setPrefWidth(250);
@@ -99,28 +142,104 @@ public class BuecherVerwalten {
 
         Label status = new Label();
         if (book.isBorrowed()) {
-            status.setText("Ausgeliehen (bis " + book.getDueDate() + ")");
+            Customer customer = DatabaseManager.getInstance().getCustomerById(book.getCustomerId());
+            String customerName = customer != null ? customer.getFirstName() + " " + customer.getLastName() + " [" + customer.getId() + "]" : "Unbekannt";
+            status.setText("Ausgeliehen (bis " + book.getDueDate() + ") von (" + customerName + ")");
         }
-
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         Button deleteBtn = new Button("Löschen");
         deleteBtn.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;");
-        deleteBtn.setOnAction(e -> deleteBook(book));
 
-        container.getChildren().addAll(title, stars, status, spacer, deleteBtn);
+        if (book.isBorrowed()) {
+            deleteBtn.setDisable(true);
+
+            Label overlay = new Label();
+            overlay.setMinSize(deleteBtn.getWidth(), deleteBtn.getHeight());
+            overlay.setPrefSize(60, 30);
+            overlay.setStyle("-fx-background-color: transparent;");
+            Tooltip tooltip = new Tooltip("Ausgeborgte Bücher können nicht gelöscht werden");
+            Tooltip.install(overlay, tooltip);
+
+            StackPane stack = new StackPane(deleteBtn, overlay);
+            container.getChildren().addAll(title, stars, status, spacer, stack);
+        } else {
+            deleteBtn.setOnAction(e -> deleteBook(book));
+            container.getChildren().addAll(title, stars, status, spacer, deleteBtn);
+        }
+
         return container;
     }
 
     private void deleteBook(Book book) {
         DatabaseManager.getInstance().deleteBook(book);
-        searchBooks(); // Liste aktualisieren
+        searchBooks();
     }
 
     private void addNewBook() {
-        DatabaseManager.getInstance().addBook("Neues Buch " + System.currentTimeMillis(), 3);
-        searchBooks();
+        Dialog<Pair<String, Integer>> dialog = new Dialog<>();
+        dialog.setTitle("Neues Buch hinzufügen");
+        dialog.setHeaderText("Bitte gib den Buchtitel und das Rating ein:");;
+        ButtonType addButtonType = new ButtonType("Hinzufügen", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        Label titleLabel = new Label("Titel:");
+        titleLabel.setStyle("-fx-text-fill: #4682B4; -fx-font-size: 14px; -fx-font-weight: bold;");
+        TextField titleField = new TextField();
+        titleField.setPromptText("Titel");
+        titleField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
+        Label ratingLabel = new Label("Rating (1-5):");
+        ratingLabel.setStyle("-fx-text-fill: #4682B4; -fx-font-size: 14px; -fx-font-weight: bold;");
+        Spinner<Integer> ratingSpinner = new Spinner<>(1, 5, 3);
+        ratingSpinner.setEditable(true);
+        ratingSpinner.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+
+        grid.add(titleLabel, 0, 0);
+        grid.add(titleField, 1, 0);
+        grid.add(ratingLabel, 0, 1);
+        grid.add(ratingSpinner, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.getDialogPane().setStyle("-fx-background-color: #f0f8ff;");
+
+        Button addBtn = (Button) dialog.getDialogPane().lookupButton(addButtonType);
+        addBtn.setStyle(
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold;"
+        );
+        Button cancelBtn = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+        cancelBtn.setStyle(
+                "-fx-background-color: #cccccc; " +
+                        "-fx-text-fill: #4682B4; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold;"
+        );
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                return new Pair<>(titleField.getText(), ratingSpinner.getValue());
+            }
+            return null;
+        });
+
+        dialog.showAndWait().ifPresent(result -> {
+            String title = result.getKey();
+            int rating = result.getValue();
+            if (title != null && !title.trim().isEmpty()) {
+                DatabaseManager.getInstance().addBook(title.trim(), rating);
+                searchBooks();
+            }
+        });
     }
 
     private String getStarString(int rating) {
