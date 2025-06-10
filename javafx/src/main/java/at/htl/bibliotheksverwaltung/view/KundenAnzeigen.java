@@ -34,6 +34,7 @@ public class KundenAnzeigen {
         searchField = new TextField();
         searchField.setPromptText("Kunden Namen eingeben...");
         searchField.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
+        searchField.setOnAction(e -> searchCustomers());
 
         Button searchButton = new Button("Suchen");
         searchButton.setStyle(

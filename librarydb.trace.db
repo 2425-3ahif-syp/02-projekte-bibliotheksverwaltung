@@ -149,3 +149,45 @@ Column "CUSTOMER_ID" not found; SQL statement:
 	at javafx.graphics@24/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at javafx.graphics@24/com.sun.glass.ui.win.WinApplication.lambda$runLoop$0(WinApplication.java:168)
 	at java.base/java.lang.Thread.run(Thread.java:1447)
+2025-06-10 10:02:58.462921+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Feld "CUSTOMER_ID" nicht gefunden
+Column "CUSTOMER_ID" not found; SQL statement:
+    INSERT INTO book (title, rating, borrowed, due_date, customer_id) VALUES
+      ('Harry Potter und der Stein der Weisen',    5, TRUE,  '25.03.2025', 1),
+      ('Harry Potter und die Kammer des Schreckens',4, FALSE, '',          NULL),
+      ('Harry Potter und der Gefangene von Askaban',5, FALSE, '',          NULL),
+      ('Don Quijote',                              5, FALSE, '',          NULL),
+      ('Herr der Ringe 1',                         4, TRUE,  '01.04.2025', 2),
+      ('Harry Potter und die Heiligtümer des Todes',3, FALSE, '',          NULL),
+      ('Der Verdacht',                             2, FALSE, '',          NULL),
+      ('Don Carlos',                               1, FALSE, '',          NULL)
+ [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.command.Parser.parseColumn(Parser.java:1171)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1156)
+	at org.h2.command.Parser.parseInsert(Parser.java:1530)
+	at org.h2.command.Parser.parsePrepared(Parser.java:698)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at at.htl.bibliotheksverwaltung/at.htl.bibliotheksverwaltung.database.DatabaseManager.insertDummyData(DatabaseManager.java:100)
+	at at.htl.bibliotheksverwaltung/at.htl.bibliotheksverwaltung.database.DatabaseManager.initializeDatabase(DatabaseManager.java:83)
+	at at.htl.bibliotheksverwaltung/at.htl.bibliotheksverwaltung.database.DatabaseManager.<init>(DatabaseManager.java:21)
+	at at.htl.bibliotheksverwaltung/at.htl.bibliotheksverwaltung.database.DatabaseManager.getInstance(DatabaseManager.java:29)
+	at at.htl.bibliotheksverwaltung/at.htl.bibliotheksverwaltung.Main.start(Main.java:14)
+	at javafx.graphics@24/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$7(LauncherImpl.java:840)
+	at javafx.graphics@24/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$5(PlatformImpl.java:444)
+	at javafx.graphics@24/com.sun.javafx.application.PlatformImpl.lambda$runLater$4(PlatformImpl.java:419)
+	at javafx.graphics@24/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@24/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@24/com.sun.glass.ui.win.WinApplication.lambda$runLoop$0(WinApplication.java:168)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
