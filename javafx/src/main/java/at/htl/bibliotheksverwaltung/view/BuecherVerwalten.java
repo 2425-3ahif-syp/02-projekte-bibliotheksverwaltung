@@ -157,7 +157,7 @@ public class BuecherVerwalten {
 
             Label overlay = new Label();
             overlay.setMinSize(deleteBtn.getWidth(), deleteBtn.getHeight());
-            overlay.setPrefSize(60, 30); // Größe ggf. anpassen
+            overlay.setPrefSize(60, 30);
             overlay.setStyle("-fx-background-color: transparent;");
             Tooltip tooltip = new Tooltip("Ausgeborgte Bücher können nicht gelöscht werden");
             Tooltip.install(overlay, tooltip);
