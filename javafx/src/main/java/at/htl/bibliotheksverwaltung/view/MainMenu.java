@@ -16,10 +16,10 @@ public class MainMenu {
         Button statistikBtn = new Button("Statistik");
         Button verwaltungBtn = new Button("Verwaltung");
         Button ausleihenBtn = new Button("Buch Ausleihen");
-        Button kundeAnlegenBtn = new Button("Kunde Anlegen");
+        Button kundeAnzeigenBtn = new Button("Kunden Verwalten");
 
         // Set preferred width and button styles
-        Button[] buttons = {rueckgabeBtn, statistikBtn, verwaltungBtn, ausleihenBtn, kundeAnlegenBtn};
+        Button[] buttons = {rueckgabeBtn, statistikBtn, verwaltungBtn, ausleihenBtn, kundeAnzeigenBtn};
         for (Button button : buttons) {
             button.setPrefWidth(200);
             button.setStyle(
@@ -35,7 +35,7 @@ public class MainMenu {
         statistikBtn.setOnAction(e -> SceneManager.setView(new Statistik().getView()));
         verwaltungBtn.setOnAction(e -> SceneManager.setView(new BuecherVerwalten().getView()));
         ausleihenBtn.setOnAction(e -> SceneManager.setView(new BuchAusleihen().getView()));
-        kundeAnlegenBtn.setOnAction(e -> SceneManager.setView(new KundeAnlegen().getView()));
+        kundeAnzeigenBtn.setOnAction(e -> SceneManager.setView(new KundenAnzeigen().getView()));
 
         // Add buttons to the VBox
         vbox.getChildren().addAll(
@@ -43,7 +43,7 @@ public class MainMenu {
                 statistikBtn,
                 verwaltungBtn,
                 ausleihenBtn,
-                kundeAnlegenBtn
+                kundeAnzeigenBtn
         );
 
         return vbox;

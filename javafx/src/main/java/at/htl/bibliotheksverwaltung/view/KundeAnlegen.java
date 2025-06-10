@@ -91,10 +91,22 @@ public class KundeAnlegen {
         );
         editButton.setOnAction(e -> SceneManager.setView(new KundenIdUeberpruefen().getView()));
 
+        Button backButton = new Button("Kunden-Liste anzeigen");
+        backButton.setPrefWidth(300);
+        backButton.setStyle(
+                "-fx-background-color: #007BFF; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold;"
+        );
+        backButton.setOnAction(e -> SceneManager.setView(new KundenAnzeigen().getView()));
+
+
+
         infoLabel = new Label();
         infoLabel.setStyle("-fx-text-fill: #4682B4;");
 
-        VBox formBox = new VBox(20, formMain, addButton, editButton, infoLabel);
+        VBox formBox = new VBox(20, formMain, addButton, editButton,backButton, infoLabel);
         formBox.setAlignment(Pos.CENTER);
 
         // Form Container Box
