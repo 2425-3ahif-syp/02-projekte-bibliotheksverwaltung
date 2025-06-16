@@ -191,3 +191,45 @@ Column "CUSTOMER_ID" not found; SQL statement:
 	at javafx.graphics@24/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at javafx.graphics@24/com.sun.glass.ui.win.WinApplication.lambda$runLoop$0(WinApplication.java:168)
 	at java.base/java.lang.Thread.run(Thread.java:1447)
+2025-06-17 00:19:24.173096+02:00 database: flush
+org.h2.message.DbException: Allgemeiner Fehler: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Admin/Nextcloud/3ahif/3ahif/syp/02-projekte-bibliotheksverwaltung/librarydb.mv.db [2.3.232/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Admin/Nextcloud/3ahif/3ahif/syp/02-projekte-bibliotheksverwaltung/librarydb.mv.db [2.3.232/7]" [50000-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:407)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:1546)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:371)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:291)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2035)
+	at org.h2.mvstore.db.Store.<init>(Store.java:133)
+	at org.h2.engine.Database.<init>(Database.java:326)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:344)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:124)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:613)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:199)
+	at at.htl.bibliotheksverwaltung/at.htl.bibliotheksverwaltung.database.DatabaseManager.<init>(DatabaseManager.java:20)
+	at at.htl.bibliotheksverwaltung/at.htl.bibliotheksverwaltung.database.DatabaseManager.getInstance(DatabaseManager.java:29)
+	at at.htl.bibliotheksverwaltung/at.htl.bibliotheksverwaltung.Main.start(Main.java:14)
+	at javafx.graphics@24/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$7(LauncherImpl.java:840)
+	at javafx.graphics@24/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$5(PlatformImpl.java:444)
+	at javafx.graphics@24/com.sun.javafx.application.PlatformImpl.lambda$runLater$4(PlatformImpl.java:419)
+	at javafx.graphics@24/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@24/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@24/com.sun.glass.ui.win.WinApplication.lambda$runLoop$0(WinApplication.java:168)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Allgemeiner Fehler: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Admin/Nextcloud/3ahif/3ahif/syp/02-projekte-bibliotheksverwaltung/librarydb.mv.db [2.3.232/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Admin/Nextcloud/3ahif/3ahif/syp/02-projekte-bibliotheksverwaltung/librarydb.mv.db [2.3.232/7]" [50000-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 27 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Admin/Nextcloud/3ahif/3ahif/syp/02-projekte-bibliotheksverwaltung/librarydb.mv.db [2.3.232/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
+	... 21 more

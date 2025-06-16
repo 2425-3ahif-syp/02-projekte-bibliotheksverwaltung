@@ -159,26 +159,33 @@ public class DatabaseManager {
 
     public void updateBook(Book book) {
         String sql = """
-            UPDATE book
-               SET borrowed    = ?,
-                   due_date    = ?,
-                   customer_id = ?
-             WHERE id = ?
-            """;
+        UPDATE book
+           SET title       = ?,
+               rating      = ?,
+               borrowed    = ?,
+               due_date    = ?,
+               customer_id = ?
+         WHERE id = ?
+    """;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setBoolean(1, book.isBorrowed());
-            stmt.setString(2, book.getDueDate());
+            stmt.setString(1, book.getTitle());
+            stmt.setInt(2, book.getRating());
+            stmt.setBoolean(3, book.isBorrowed());
+            stmt.setString(4, book.getDueDate());
+
             if (book.getCustomerId() != 0) {
-                stmt.setInt(3, book.getCustomerId());
+                stmt.setInt(5, book.getCustomerId());
             } else {
-                stmt.setNull(3, Types.BIGINT);
+                stmt.setNull(5, java.sql.Types.BIGINT);
             }
-            stmt.setInt(4, book.getId());
+
+            stmt.setLong(6, book.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void deleteBook(Book book) {
         String sql = "DELETE FROM book WHERE id = ?";

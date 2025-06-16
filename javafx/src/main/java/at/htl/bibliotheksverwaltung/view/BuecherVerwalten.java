@@ -20,6 +20,8 @@ public class BuecherVerwalten {
     private VBox resultList;
     private ComboBox<String> statusFilter;
     private ComboBox<Customer> customerFilter;
+    private boolean editMode = false;
+
 
     public VBox getView() {
         root = new VBox(20);
@@ -67,8 +69,22 @@ public class BuecherVerwalten {
                         "-fx-font-weight: bold; "
         );
         addBookButton.setOnAction(e -> addNewBook());
+        Button editBookButton = new Button("Buch Bearbeiten");
+        editBookButton.setStyle(
+                "-fx-background-color: #4682B4; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold;"
+        );
 
-        searchBox.getChildren().addAll(searchField, searchButton, statusFilter, customerFilter, addBookButton);
+        editBookButton.setOnAction(e -> {
+            editMode = true;
+
+        });
+
+
+
+        searchBox.getChildren().addAll(searchField, searchButton, statusFilter, customerFilter, addBookButton,editBookButton);
 
         resultList = new VBox(10);
         ScrollPane scrollPane = new ScrollPane(resultList);
@@ -168,6 +184,17 @@ public class BuecherVerwalten {
             deleteBtn.setOnAction(e -> deleteBook(book));
             container.getChildren().addAll(title, stars, status, spacer, deleteBtn);
         }
+        container.setOnMouseClicked(event -> {
+            if (editMode) {
+                if (book.isBorrowed()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Ausgeborgte Bücher können nicht bearbeitet werden.");
+                    alert.show();
+                } else {
+                    SceneManager.setView(new BuchBearbeiten(book).getView());
+                }
+                editMode = false;
+            }
+        });
 
         return container;
     }
