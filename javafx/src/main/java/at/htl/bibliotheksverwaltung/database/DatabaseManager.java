@@ -189,7 +189,24 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
+    public void deleteCustomer(long customerId) {
+        try {
+            String clearCustomerFromBooks = "UPDATE book SET customer_id = NULL WHERE customer_id = ?";
+            try (PreparedStatement clearStmt = connection.prepareStatement(clearCustomerFromBooks)) {
+                clearStmt.setLong(1, customerId);
+                clearStmt.executeUpdate();
+            }
 
+            // Lösche den Kunden aus der customer-Tabelle
+            String deleteSQL = "DELETE FROM customer WHERE id = ?";
+            try (PreparedStatement stmt = connection.prepareStatement(deleteSQL)) {
+                stmt.setLong(1, customerId);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     // CRUD: Customers
     public List<Customer> getAllCustomers() {
         List<Customer> customers = new ArrayList<>();

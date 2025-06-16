@@ -124,11 +124,21 @@ public class KundenAnzeigen {
         Label birthLabel = new Label("Geburtsdatum: " + safe(customer.getBirthYear()));
         birthLabel.setStyle("-fx-font-size: 14px;");
 
-        container.getChildren().addAll(idLabel, nameLabel, birthLabel);
+        Button deleteButton = new Button("Löschen");
+        deleteButton.setStyle(
+                "-fx-background-color: #B22222; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-weight: bold;"
+        );
+        deleteButton.setOnAction(e -> {
+            DatabaseManager.getInstance().deleteCustomer(customer.getId());
+            searchCustomers(); // Aktualisiere Liste nach dem Löschen
+        });
+
+        container.getChildren().addAll(idLabel, nameLabel, birthLabel,deleteButton);
         return container;
     }
 
-    // Hilfsmethode für null-sicheren Text
     private String safe(String text) {
         return text == null ? "(leer)" : text;
     }
