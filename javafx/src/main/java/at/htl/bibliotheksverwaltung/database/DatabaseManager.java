@@ -44,9 +44,6 @@ public class DatabaseManager {
         }
     }
 
-    /**
-     * Legt die Tabellen an (inklusive customer_id in book) und befüllt sie mit Dummy-Daten.
-     */
     public void initializeDatabase() throws SQLException {
         String[] createTableStatements = new String[] {
                 """
@@ -85,18 +82,16 @@ public class DatabaseManager {
 
     public void insertDummyData() {
         try (Statement stmt = connection.createStatement()) {
-            // Alte Daten löschen
+
             stmt.execute("TRUNCATE TABLE book RESTART IDENTITY");
             stmt.execute("TRUNCATE TABLE customer RESTART IDENTITY");
 
-            // Dummy-Kunden
             stmt.execute("""
                 INSERT INTO customer (first_name, last_name, birth_day, birth_month, birth_year, street, plz, region) VALUES
                 ('Max', 'Mustermann', '01', '01', '2000', 'Musterstraße 1', '4020', 'Linz'),
                 ('Anna', 'Musterfrau',  '12', '02', '2001', 'Beispielweg 2', '4030', 'Linz')
             """);
 
-            // Dummy-Bücher
             stmt.execute("""
                 INSERT INTO book (title, rating, borrowed, due_date, customer_id) VALUES
                   ('Harry Potter und der Stein der Weisen',    5, TRUE,  '25.03.2025', 1),
@@ -113,7 +108,6 @@ public class DatabaseManager {
         }
     }
 
-    // CRUD: Books
     public List<Book> getAllBooks() {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT * FROM book";
@@ -204,7 +198,6 @@ public class DatabaseManager {
                 clearStmt.executeUpdate();
             }
 
-            // Lösche den Kunden aus der customer-Tabelle
             String deleteSQL = "DELETE FROM customer WHERE id = ?";
             try (PreparedStatement stmt = connection.prepareStatement(deleteSQL)) {
                 stmt.setLong(1, customerId);
@@ -214,7 +207,6 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
-    // CRUD: Customers
     public List<Customer> getAllCustomers() {
         List<Customer> customers = new ArrayList<>();
         String sql = "SELECT * FROM customer";

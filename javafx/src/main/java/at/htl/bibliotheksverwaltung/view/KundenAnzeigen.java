@@ -25,11 +25,9 @@ public class KundenAnzeigen {
         root = new VBox(20);
         root.setPadding(new Insets(20));
 
-        // Top-Bar
         HBox topBar = createTopBar("Liste der Kunden");
         root.getChildren().add(topBar);
 
-        // Suchleiste
         HBox searchBox = new HBox(10);
         searchField = new TextField();
         searchField.setPromptText("Kunden Namen eingeben...");
@@ -46,14 +44,13 @@ public class KundenAnzeigen {
         searchButton.setOnAction(e -> searchCustomers());
         Button newCustomerButton = new Button("Kunde Anlegen");
         newCustomerButton.setStyle(
-                "-fx-background-color: #4682B4; " + // Orange
+                "-fx-background-color: #4682B4; " +
                         "-fx-text-fill: white; " +
                         "-fx-font-size: 14px; " +
                         "-fx-font-weight: bold;"
         );
 
 
-        // Ansicht wechseln bei Klick
         newCustomerButton.setOnAction(e -> {
             SceneManager.setView(new KundeAnlegen().getView());
         });
@@ -66,8 +63,6 @@ public class KundenAnzeigen {
                         "-fx-font-weight: bold;"
         );
         editButton.setOnAction(e -> SceneManager.setView(new KundenIdUeberpruefen().getView()));
-
-
 
         searchBox.getChildren().addAll(searchField, searchButton, newCustomerButton,editButton);
 

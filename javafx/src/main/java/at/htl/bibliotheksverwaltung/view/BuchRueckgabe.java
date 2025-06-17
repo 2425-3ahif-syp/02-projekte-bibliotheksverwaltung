@@ -24,11 +24,9 @@ public class BuchRueckgabe {
         root = new VBox(20);
         root.setPadding(new Insets(20));
 
-        // Top-Bar
         HBox topBar = createTopBar("Buch Rückgabe");
         root.getChildren().add(topBar);
 
-        // Suchleiste
         HBox searchBox = new HBox(10);
         searchField = new TextField();
         searchField.setPromptText("Harry Potter...");
@@ -49,7 +47,6 @@ public class BuchRueckgabe {
         resultList = new VBox(10);
         root.getChildren().addAll(searchBox, resultList);
 
-        // Initial: Alle ausgeliehenen Bücher anzeigen
         searchBooks();
         return root;
     }
@@ -75,7 +72,6 @@ public class BuchRueckgabe {
         container.setPadding(new Insets(10));
         container.setStyle("-fx-border-color: #4682B4; -fx-background-color: #f0f8ff;");
 
-        // 2) Links: alle Infos in einer HBox
         Label title = new Label(book.getTitle());
         title.setPrefWidth(300);
         title.setStyle("-fx-font-size: 16px;");
@@ -123,7 +119,6 @@ public class BuchRueckgabe {
             searchBooks();
         });
 
-        // Button mittig-vertikal rechts platzieren
         BorderPane.setAlignment(returnBtn, Pos.CENTER);
         container.setRight(returnBtn);
 

@@ -25,11 +25,9 @@ public class BuchAusleihen {
         root = new VBox(20);
         root.setPadding(new Insets(20));
 
-        // Top-Bar
         HBox topBar = createTopBar("Buch Ausleihen");
         root.getChildren().add(topBar);
 
-        // Suchleiste
         HBox searchBox = new HBox(10);
         searchField = new TextField();
         searchField.setPromptText("Buchtitel...");
@@ -50,7 +48,6 @@ public class BuchAusleihen {
         resultList = new VBox(10);
         root.getChildren().addAll(searchBox, resultList);
 
-        // Initial alle verfügbaren Bücher
         searchBooks();
         return root;
     }
@@ -97,7 +94,6 @@ public class BuchAusleihen {
         );
         borrowBtn.setOnAction(e -> borrowBook(book));
 
-        // Button mittig-vertikal rechts platzieren
         BorderPane.setAlignment(borrowBtn, Pos.CENTER);
         container.setRight(borrowBtn);
 
@@ -106,7 +102,6 @@ public class BuchAusleihen {
 
 
     private void borrowBook(Book book) {
-        // Dialog zur Kundenauswahl
         Dialog<Customer> dialog = new Dialog<>();
         dialog.setTitle("Kunden auswählen");
         dialog.setHeaderText("Bitte wählen Sie den Kunden aus:");
@@ -117,7 +112,6 @@ public class BuchAusleihen {
                 )
         );
         cb.setVisibleRowCount(5);
-        // damit in Liste & Button lesbar
         cb.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Customer item, boolean empty) {
@@ -137,7 +131,6 @@ public class BuchAusleihen {
         dialog.getDialogPane().getButtonTypes()
                 .addAll(ButtonType.OK, ButtonType.CANCEL);
 
-        // OK-Button nur aktiv, wenn ein Kunde gewählt ist
         Button ok = (Button) dialog.getDialogPane()
                 .lookupButton(ButtonType.OK);
         ok.disableProperty().bind(cb.valueProperty().isNull());

@@ -23,7 +23,6 @@ public class StatistikDetail {
         root = new VBox(20);
         root.setPadding(new Insets(20));
 
-        // Top-Bar
         HBox topBar = createTopBar("Statistik");
         root.getChildren().add(topBar);
 
@@ -48,19 +47,19 @@ public class StatistikDetail {
                     );
                     switch (i) {
                         case 1:
-                            card.setStyle("-fx-border-color: red; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
+                            card.setStyle("-fx-border-color: red; -fx-background-color: #f0f8ff;");
 
                             break;
                         case 2:
-                            card.setStyle("-fx-border-color: orange; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
+                            card.setStyle("-fx-border-color: orange; -fx-background-color: #f0f8ff;");
 
                             break;
                         case 3:
-                            card.setStyle("-fx-border-color: yellow; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
+                            card.setStyle("-fx-border-color: yellow; -fx-background-color: #f0f8ff;");
 
                             break;
                         case 4:
-                            card.setStyle("-fx-border-color: lightgreen; -fx-background-color: #f0f8ff;");  // Light blue background with a blue border
+                            card.setStyle("-fx-border-color: lightgreen; -fx-background-color: #f0f8ff;");
 
                             break;
                         case 5:
@@ -134,7 +133,7 @@ public class StatistikDetail {
     private HBox createTopBar(String titleText) {
         HBox topBar = new HBox(20);
         topBar.setPadding(new Insets(10));
-        topBar.setStyle("-fx-background-color: #4682B4; -fx-border-color: #ccc;"); // Blue background for top bar
+        topBar.setStyle("-fx-background-color: #4682B4; -fx-border-color: #ccc;");
 
         Label homeIcon = new Label("\u2302");
         homeIcon.setStyle("-fx-font-size: 20; -fx-text-fill: white;");

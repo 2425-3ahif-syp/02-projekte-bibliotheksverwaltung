@@ -2,9 +2,9 @@ package at.htl.bibliotheksverwaltung.model;
 
 public class Book {
     private String title;
-    private int rating;         // z.B. 1-5 Sterne
+    private int rating;
     private boolean borrowed;
-    private String dueDate;     // z.B. "25.03.2025"
+    private String dueDate;
     private int id;
     private int customerId;
 

@@ -33,18 +33,15 @@ public class KundenIdUeberpruefen {
         root.setPadding(new Insets(20));
         root.setAlignment(Pos.TOP_CENTER);
 
-        // Top-Bar
         HBox topBar = createTopBar("Kunde bearbeiten");
         root.getChildren().add(topBar);
 
-        // Input fields
         idField = createStyledTextField("ID");
         idConfirmField = createStyledTextField("ID bestätigen");
 
-        // Layouts
+        //
         VBox idBox = new VBox(10, idField, idConfirmField);
 
-        // Submit button
         Button confirmButton = new Button("ID bestätigen");
         confirmButton.setPrefWidth(300);
         confirmButton.setStyle(
@@ -72,7 +69,6 @@ public class KundenIdUeberpruefen {
         VBox formBox = new VBox(20, idBox, confirmButton,backButton, infoLabel);
         formBox.setAlignment(Pos.CENTER);
 
-        // Form Container Box
         VBox formContainer = new VBox(formBox);
         formContainer.setAlignment(Pos.CENTER);
         formContainer.setStyle("-fx-border-color: black; -fx-padding: 20;");

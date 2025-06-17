@@ -10,13 +10,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Start and initialize the database
         DatabaseManager.getInstance();
 
-        // Initialize SceneManager (creates scene and main layout)
         SceneManager.init(primaryStage);
 
-        // Load initial view
         SceneManager.setView(new MainMenu().getView());
 
         primaryStage.setTitle("Bibliotheksverwaltung - Beispiel");

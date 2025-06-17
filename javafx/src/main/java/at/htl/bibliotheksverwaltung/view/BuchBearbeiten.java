@@ -34,11 +34,9 @@ public class BuchBearbeiten {
         root.setPadding(new Insets(20));
         root.setAlignment(Pos.TOP_CENTER);
 
-        // Überschrift + Zurück-Button
         HBox topBar = createTopBar("Buch bearbeiten");
         root.getChildren().add(topBar);
 
-        // Eingabefelder
         titleField = createStyledTextField("Titel");
         titleField.setText(book.getTitle());
 
@@ -54,7 +52,6 @@ public class BuchBearbeiten {
         form.setPadding(new Insets(10));
         root.getChildren().add(form);
 
-        // Speicher-Button
         Button saveButton = new Button("Speichern");
         saveButton.setStyle("-fx-background-color: #4682B4; -fx-text-fill: white;");
         saveButton.setOnAction(e -> {

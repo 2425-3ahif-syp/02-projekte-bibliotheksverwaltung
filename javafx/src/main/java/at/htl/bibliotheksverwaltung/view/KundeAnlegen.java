@@ -37,11 +37,9 @@ public class KundeAnlegen {
         root.setPadding(new Insets(20));
         root.setAlignment(Pos.TOP_CENTER);
 
-        // Top-Bar
         HBox topBar = createTopBar("Kunden anlegen");
         root.getChildren().add(topBar);
 
-        // Profile picture placeholder
         Label profileImage = new Label("\uD83D\uDC64");
         profileImage.setStyle("-fx-font-size: 80; -fx-text-fill: black;");
         VBox imageBox = new VBox(profileImage);
@@ -49,7 +47,6 @@ public class KundeAnlegen {
         imageBox.setStyle("-fx-border-color: black; -fx-border-width: 1;");
         imageBox.setAlignment(Pos.CENTER);
 
-        // Input fields
         firstNameField = createStyledTextField("Vorname");
         lastNameField = createStyledTextField("Nachname");
         birthDayField = createStyledTextField("Tag");
@@ -59,7 +56,6 @@ public class KundeAnlegen {
         regionField = createStyledTextField("Ort");
         plzField = createStyledTextField("Plz");
 
-        // Layouts
         VBox nameBox = new VBox(10, firstNameField, lastNameField);
         HBox birthBox = new HBox(10, birthDayField, birthMonthField, birthYearField);
         HBox addressBox = new HBox(10, streetField, regionField, plzField);
@@ -70,7 +66,6 @@ public class KundeAnlegen {
         HBox formMain = new HBox(20, imageBox, formFields);
         formMain.setAlignment(Pos.CENTER);
 
-        // Submit button
         Button addButton = new Button("Erstellen");
         addButton.setPrefWidth(300);
         addButton.setStyle(
@@ -101,15 +96,12 @@ public class KundeAnlegen {
         );
         backButton.setOnAction(e -> SceneManager.setView(new KundenAnzeigen().getView()));
 
-
-
         infoLabel = new Label();
         infoLabel.setStyle("-fx-text-fill: #4682B4;");
 
         VBox formBox = new VBox(20, formMain, addButton, editButton,backButton, infoLabel);
         formBox.setAlignment(Pos.CENTER);
 
-        // Form Container Box
         VBox formContainer = new VBox(formBox);
         formContainer.setAlignment(Pos.CENTER);
         formContainer.setStyle("-fx-border-color: black; -fx-padding: 20;");
@@ -155,11 +147,9 @@ public class KundeAnlegen {
             return;
         }
 
-        // All inputs valid — insert into DB
         DatabaseManager.getInstance().addCustomer(first, last, birthDay, birthMonth, birthYear, street, plz, region);
         infoLabel.setText("Kunde erfolgreich hinzugefügt!");
 
-        // Felder leeren
         firstNameField.clear();
         lastNameField.clear();
         birthDayField.clear();

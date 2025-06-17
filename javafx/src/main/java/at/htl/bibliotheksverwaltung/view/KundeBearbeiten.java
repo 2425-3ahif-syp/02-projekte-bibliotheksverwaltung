@@ -45,7 +45,6 @@ public class KundeBearbeiten {
         HBox topBar = createTopBar("Kunde bearbeiten");
         root.getChildren().add(topBar);
 
-        // Profile picture placeholder
         Label profileImage = new Label("\uD83D\uDC64");
         profileImage.setStyle("-fx-font-size: 80; -fx-text-fill: black;");
         VBox imageBox = new VBox(profileImage);
@@ -53,7 +52,6 @@ public class KundeBearbeiten {
         imageBox.setStyle("-fx-border-color: black; -fx-border-width: 1;");
         imageBox.setAlignment(Pos.CENTER);
 
-        // Input fields
         firstNameField = createStyledTextField("Vorname");
         lastNameField = createStyledTextField("Nachname");
         birthDayField = createStyledTextField("Tag");
@@ -65,7 +63,6 @@ public class KundeBearbeiten {
 
         getCustomer();
 
-        // Layouts
         VBox nameBox = new VBox(10, firstNameField, lastNameField);
         HBox birthBox = new HBox(10, birthDayField, birthMonthField, birthYearField);
         HBox addressBox = new HBox(10, streetField, regionField, plzField);
@@ -76,7 +73,6 @@ public class KundeBearbeiten {
         HBox formMain = new HBox(20, imageBox, formFields);
         formMain.setAlignment(Pos.CENTER);
 
-        // Submit button
         Button changeButton = new Button("Ändern");
         changeButton.setPrefWidth(300);
         changeButton.setStyle(
@@ -103,7 +99,6 @@ public class KundeBearbeiten {
         VBox formBox = new VBox(20, formMain, changeButton, backButton, infoLabel);
         formBox.setAlignment(Pos.CENTER);
 
-        // Form Container Box
         VBox formContainer = new VBox(formBox);
         formContainer.setAlignment(Pos.CENTER);
         formContainer.setStyle("-fx-border-color: black; -fx-padding: 20;");
@@ -160,7 +155,6 @@ public class KundeBearbeiten {
             return;
         }
 
-        // All inputs valid — insert into DB
         DatabaseManager.getInstance().updateCustomer( customerId,first, last, Integer.parseInt(birthDay), Integer.parseInt(birthMonth), Integer.parseInt(birthYear), street, plz, region);
         infoLabel.setText("Kunde erfolgreich geändert!");
     }

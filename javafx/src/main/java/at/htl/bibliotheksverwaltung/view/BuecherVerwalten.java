@@ -27,7 +27,6 @@ public class BuecherVerwalten {
         root = new VBox(20);
         root.setPadding(new Insets(20));
 
-        // Top-Bar
         HBox topBar = createTopBar("Verwaltung");
         root.getChildren().add(topBar);
 
@@ -99,7 +98,7 @@ public class BuecherVerwalten {
 
     private void updateCustomerList() {
         customerFilter.getItems().clear();
-        customerFilter.getItems().add(null); // Für "alle Kunden"
+        customerFilter.getItems().add(null);
         customerFilter.getItems().addAll(DatabaseManager.getInstance().getAllCustomers());
     }
 
